@@ -7,6 +7,8 @@ author:
     - Carlos Jaramillo^[Smithsonian Tropical Research Institute, U. Montpellier, and University of Salamanca]
 ---
 
+[![DOI](https://zenodo.org/badge/349142848.svg)](https://zenodo.org/badge/latestdoi/349142848)
+
 # Repository structure 
 
 The present repo has the following files and directories:
