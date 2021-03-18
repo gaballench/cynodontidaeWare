@@ -173,3 +173,28 @@ The present repo has the following files and directories:
 9 directories, 148 files
 ```
 
+# Usage
+
+The pdf file has specific instruccions for reproducing each analysis, the parsimony and the bayesian reconstruction.
+
+## Dependencies
+
+The parsimony analysis depends on `TNT` and `R`
+
+The bayesian analysis depends on `jModelTest`, `MAFFT`, `R`, and `MrBayes`.
+
+Most of the analytical steps were run on a laptop with two dual-core processors and 8Gb RAM. Cumputationally-intensive steps (e.g., alignment, substitution models and bayesian tree inference) were run on a cluster using 16-24 threads.
+
+Please note that the computationa procedures were carried out on Linux, and thus it should run on most UNIX systems. No effort was done to check whether they run on Windows.
+
+# License
+
+This program is free software (GNU General Public License v3): you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+# Citation
+
+Please cite this as:
+
+Ballen, G.A. Moreno-Bernal, J.W. & Jaramillo, C. Submitted. The fossil record of Saber-Tooth Characins (Teleostei: Characiformes: Cynodontinae), their phylogenetic relationships, and paleobiogeographical implications.
