@@ -1,0 +1,62 @@
+begin mrbayes;
+[Script documentation carried out using comments]
+
+[log the analysis]
+log start filename = cynoMolonly.log;
+[read the matrix concatenatedMolonly.nexus]
+execute concatenatedMolonly.nexus;
+
+[close analysis at end]
+set autoclose = yes;
+[set Acestrorhynchus_microlepis as outgroup]
+outgroup Acestrorhynchus_microlepis;
+[This command shows the status of all the taxa, according to the documentation]
+taxastat;
+
+[definition of individual partitions per marker]
+charset 16S = 1-588;
+charset 18S = 589-915;
+charset ATPase6_8 = 916-1698;
+charset COI = 1699-2203;
+charset CytB = 2204-3040;
+charset Myh6 = 3041-3783;
+charset RAG1 = 3784-5048;
+charset RAG2 = 5049-6061;
+
+[definition of combined dataset]
+partition combined = 8: 16S, 18S, ATPase6_8, COI, CytB, Myh6, RAG1, RAG2;
+
+[specification of substitution models]
+set partition = combined;
+lset applyto = (1) nst = 6 rates = propinv; [SYM+I]
+lset applyto = (2) nst = 2; [K80]
+lset applyto = (3) nst = 2 rates = propinv; [HKY+I]
+lset applyto = (4) nst = 2 rates = gamma; [HKY+G]
+lset applyto = (5) nst = 2 rates = propinv; [HKY+I]
+lset applyto = (6) nst = 2; [K80]
+lset applyto = (7) nst = 2; [K80]
+lset applyto = (8) nst = 2; [K80]
+
+[unlink parameters across partitions]
+unlink shape = (all) pinvar = (all) statefreq = (all) revmat = (all) tratio = (all);
+
+[allow separate gamma parameters for each partition]
+prset applyto=(all) ratepr=variable;
+
+[show the model just specified for each partition]
+showmodel;
+
+[set up the MCMC, with this setting the analysis will need not less than 16 threads]
+mcmcp nruns = 2 ngen = 4000000 nchains = 8 samplefreq = 4000 printfreq = 100;
+[run the MCMC]
+mcmc;
+
+[summarize the posterior trees]
+sumt nruns = 2 relburnin = yes burninfrac = 0.25;
+plot;
+
+[summarize parameter posteriors]
+sump;
+
+log stop;
+end;

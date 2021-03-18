@@ -1,0 +1,58 @@
+
+
+                            MrBayes v3.2.6 x64
+
+                      (Bayesian Analysis of Phylogeny)
+
+              Distributed under the GNU General Public License
+
+
+               Type "help" or "help <command>" for information
+                     on the commands that are available.
+
+                   Type "about" for authorship and general
+                       information about the program.
+
+
+
+   Executing file "sequences/alignedSeqs/substModels/nexus/concatenatedMolmorph.nexus"
+   UNIX line termination
+   Longest line length = 1304
+   Parsing file
+   Expecting NEXUS formatted file
+   Reading data block
+      Allocated taxon set
+      Allocated matrix
+      Defining new matrix with 10 taxa and 6405 characters
+      Data is Mixed
+         Data for partition 1 is Dna
+         Data for partition 2 is Standard
+      There are a total of 2 default data divisions
+      Gaps coded as -
+      Missing data coded as ?
+      Data matrix is interleaved
+      Taxon  1 -> Acestrorhynchus_falcirostris
+      Taxon  2 -> Acestrorhynchus_microlepis
+      Taxon  3 -> Cynodon_gibbus
+      Taxon  4 -> Cynodon_septenarius
+      Taxon  5 -> Hydrolycus_armatus
+      Taxon  6 -> Hydrolycus_scomberoides
+      Taxon  7 -> Hydrolycus_sp_Fossil
+      Taxon  8 -> Hydrolycus_tatauaia
+      Taxon  9 -> Hydrolycus_wallacei
+      Taxon 10 -> Rhaphiodon_vulpinus
+      Successfully read matrix
+      Setting default partition, dividing characters into 2 parts
+      Setting model defaults
+      Seed (for generating default start values) = 1591799924
+      WARNING: There are 3 characters incompatible with the specified
+               coding bias. These characters will be excluded.
+      Setting output file names to "sequences/alignedSeqs/substModels/nexus/concatenatedMolmorph.nexus.run<i>.<p|t>"
+   Exiting data block
+   Reached end of file
+
+   Tasks completed, exiting program because mode is noninteractive
+   To return control to the command line after completion of file processing, 
+   set mode to interactive with 'mb -i <filename>' (i is for interactive)
+   or use 'set mode=interactive'
+
