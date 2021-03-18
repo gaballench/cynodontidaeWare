@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# run the TNT script 'complete.run' on the background. This will carry out the phylogenetic analysis and draw the annotated cladogram. Please refer to the file 'complete.run' for further details and comments. 
+tnt bground p complete.run
+
+# Load the 'treToNewick' function in R and convert the 'complete.tre' output file to the newick format ('complete.newick'). Afterwards just open it in figtree or your preferred program for tree edition.
+Rscript -e 'source("treToNewick.R")' -e 'treToNewick("complete.tre", "complete.newick", subsetting = FALSE)'

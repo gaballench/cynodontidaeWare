@@ -1,0 +1,107 @@
+macro =;
+
+/* Set max RAM to 1 Gb*/
+mxram 1000;
+
+/* Collapse all unsupported branches*/
+collapse [;
+
+/* 
+Save all the output to the file 'complete.out'
+It can be opened in any text editor
+ */
+log complete.out;
+
+/*
+Read the matrix 'complete.tnt'
+*/
+proc complete.tnt;
+
+/*
+Number of trees to be held in memory
+*/
+hold 1000000;
+
+/*
+Set random seed
+*/
+rseed 0;
+
+/*
+Open tree file in parenthetical notation
+*/
+tsave * complete.tre;
+
+/*
+Set the composite taxon 'Outgroup' as the root
+*/
+outgroup Acestrorhynchus;
+
+/*
+Inactivate uninformative characters
+*/
+ccode ] 28 33 37;
+
+/*
+Given the number of taxa, carry out an exact search
+with implicit enumeration
+*/
+ienum;
+
+/*
+Taxon names ON
+*/
+taxname =;
+
+/*
+Plot MPT with node numbers
+*/
+naked -;
+tplot /;
+naked =;
+
+/*
+Tree tags ON
+*/
+ttags =;
+
+/*
+Overall CI and RI
+*/
+run STATSALL.RUN 1;
+
+/*
+Bootstrap and Jackknife branch support values
+*/
+resample boot rep 10000;
+resample jak rep 10000;
+
+/*
+Save tags to tree file in parenthetical notation
+*/
+save *;
+
+/*
+Plot consensus tree to log file
+*/
+tplot /;
+
+/*
+Close tree files
+*/
+tsave /;
+
+/*
+List synapomorphies common to all trees
+*/
+apo -;
+
+/*
+Close log file
+*/
+log /;
+
+/*
+Close TNT
+*/
+quit;

@@ -1,0 +1,113 @@
+macro-; macro *20 ( nchar*7 ); macro [200; macro prot 1; macro= ;
+quote
+=======================================
+=Specify fit concavity as an argument!=
+=======================================;
+lquote - ;
+echo-;
+report- ; 
+var =
+   0 theminchar
+   1 themaxchar
+   + THEMINtree
+   + THEMAXtree
+   + cichar   [ ( nchar + 1 ) ]
+   + hichar   [ ( nchar + 1 ) ]
+   + richar   [ ( nchar + 1 ) ] 
+   + rcchar   [ ( nchar + 1 ) ]
+   + fitchar  [ ( nchar + 1 ) ]
+   + CItree   [ ( ntrees + 1 ) ]
+   + HItree   [ ( ntrees + 1 ) ]
+   + RItree   [ ( ntrees + 1 ) ]
+   + RCtree   [ ( ntrees + 1 ) ]
+   + ACItree  [ ( ntrees + 1 ) ]
+   + HDItree  [ ( ntrees + 1 ) ]   
+   + HDRtree  [ ( ntrees + 1 ) ]   
+   + thischar
+   + THIStree
+   + kfit
+   + sumcichar
+   ;
+
+if ( argnumber > 1)
+   errmsg 
+   *Valid argument only to specify fit concavity (default=3). ;
+   exit ;
+end ;
+
+if ( argnumber == 0 )
+      set kfit 3 ;
+      piwe : 3;
+else
+   set kfit ( %1 ) ; 
+   piwe : 'kfit' ; 
+end ;
+end ;
+set THEMINtree minsteps ;
+set THEMAXtree maxsteps ;
+fit * ;
+
+loop 0 ntrees
+            
+      loop 0 nchar
+         progress #1 #2 (nchar+1) Calculating character indices... ;
+         set thischar length[#1 #2] ;
+         set themaxchar maxsteps[#2] ;
+         set theminchar minsteps[#2] ;
+         if ('thischar' == 0)
+            set cichar[#2] 1 ;
+         else   
+            set cichar[#2]  'theminchar'/'thischar' ;
+         end ;   
+         set hichar[#2]  1-'cichar[#2]' ;
+         if ( ('themaxchar'-'theminchar') == 0 )
+            set richar[#2] 1 ;
+         else  
+            set richar[#2]  ('themaxchar'-'thischar')/('themaxchar'-'theminchar') ;
+         end ;
+         set rcchar[#2]  'richar[#2]'*'cichar[#2]' ;
+         set fitchar[#2] 'kfit' / ( 'kfit' + ( 'thischar' - 'theminchar' ) ) ;
+      
+      stop ;
+      
+
+      progress #1 (ntrees+1) Calculating tree indices... ;
+      set THIStree length[#1] ;
+      set CItree[#1] 'THEMINtree'/'THIStree' ;
+      set HItree[#1] 1-'CItree[#1]' ;
+      set RItree[#1] ('THEMAXtree'-'THIStree')/('THEMAXtree'-'THEMINtree') ;
+      set RCtree[#1] 'RItree[#1]'*'CItree[#1]' ;
+	  loop 0 nchar
+	     set sumcichar += 'cichar[#2]' ;
+		 set ACItree[#1] 'sumcichar'/(nchar+1) ;
+		 stop ;
+	  set sumcichar = 0 ;
+	  set HDItree[#1] 'ACItree[#1]'-'CItree[#1]' ;
+	  set HDRtree[#1] 'HDItree[#1]'/'HItree[#1]' ;
+	  maketable cichar Consistency Index of characters-tree #1 ;
+      maketable hichar Homoplasy Index of characters-tree #1 ;
+      maketable richar Retention Index of characters-tree #1 ;
+      maketable rcchar Rescaled Consistency Index of characters-tree #1 ;
+      maketable fitchar Fitness of characters-tree #1 (conc 'kfit') ;
+stop ;
+
+maketable CItree Consistency Index of trees ;
+maketable HItree Homoplasy Index of trees ;
+maketable RItree Retention Index of trees ;
+maketable RCtree Rescaled Consistency Index of trees ;
+maketable ACItree Average Consistency Index of trees ;
+maketable HDItree Homoplasy Distribution Index of trees ;
+maketable HDRtree Homoplasy Distribution Ratio of trees ;
+quote Fitness of trees ;
+fit * ;
+quote (conc 'kfit') 
+
+
+
+;
+progress/ ;
+silent - con buffer ;
+macfloat 3 ;
+report= ;
+quote Macro designed by Peterson L. Lopes (v. 1.3);
+proc/ ; 
