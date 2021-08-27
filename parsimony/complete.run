@@ -38,11 +38,6 @@ Set the composite taxon 'Outgroup' as the root
 outgroup Acestrorhynchus;
 
 /*
-Inactivate uninformative characters
-*/
-ccode ] 28 33 37;
-
-/*
 Given the number of taxa, carry out an exact search
 with implicit enumeration
 */
