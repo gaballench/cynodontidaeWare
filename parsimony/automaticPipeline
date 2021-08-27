@@ -4,4 +4,4 @@
 tnt bground p complete.run
 
 # Load the 'treToNewick' function in R and convert the 'complete.tre' output file to the newick format ('complete.newick'). Afterwards just open it in figtree or your preferred program for tree edition.
-Rscript -e 'source("treToNewick.R")' -e 'treToNewick("complete.tre", "complete.newick", subsetting = FALSE)'
+Rscript -e 'library(tbea)' -e 'tnt2newick("complete.tre", "complete.newick", subsetting = FALSE)'
