@@ -1,9 +1,0 @@
-"file"	"start"	"end"
-"sequences/alignedSeqs/substModels/nexus/16S.fa.renamed.aligned.trimmed.nex"	1	588
-"sequences/alignedSeqs/substModels/nexus/18S.fa.renamed.aligned.trimmed.nex"	589	1176
-"sequences/alignedSeqs/substModels/nexus/ATPase6-8.fa.renamed.aligned.trimmed.nex"	1177	1959
-"sequences/alignedSeqs/substModels/nexus/COI.fa.renamed.aligned.trimmed.nex"	1960	2464
-"sequences/alignedSeqs/substModels/nexus/CytB.fa.renamed.aligned.trimmed.nex"	2465	3301
-"sequences/alignedSeqs/substModels/nexus/Myh6.fa.renamed.aligned.trimmed.nex"	3302	4044
-"sequences/alignedSeqs/substModels/nexus/RAG1.fa.renamed.aligned.trimmed.nex"	4045	5309
-"sequences/alignedSeqs/substModels/nexus/RAG2.fa.renamed.aligned.trimmed.nex"	5310	6322

@@ -92,6 +92,13 @@ List synapomorphies common to all trees
 apo -;
 
 /*
+Plot MPT with node numbers
+*/
+naked -;
+tplot /;
+naked =;
+
+/*
 Close log file
 */
 log /;

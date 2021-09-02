@@ -122,6 +122,7 @@ concatNexus <- function(pattern, path = ".", filename, morpho = FALSE, morphoFil
     for (i in 1:(length(NCHARvector) - 1)) {
         startElem[i+1] <- endElem[i] + 1
     }
+    outputNEXUS <- gsub(x = outputNEXUS, pattern = ";;", replacement = ";")
     summaryTable <- data.frame(file = nexFiles, start = startElem, end = endElem)
     writeLines(text = outputNEXUS, con = filename)
     write.table(x = summaryTable, file = sumFilename, sep = "\t", row.names = FALSE)

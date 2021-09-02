@@ -2,7 +2,7 @@
 title: "The fossil record of Saber-Tooth Characins (Teleostei: Characiformes: Cynodontinae), their phylogenetic relationships, and paleobiogeographical implications"
 subtitle: "Supplementary material"
 author: 
-    - Gustavo A. Ballen^[Museu de Zoologia da Universidade de São Paulo, Smithsonian Tropical Research Institute, and Queen Mary University of London]
+    - Gustavo A. Ballen^[Museu de Zoologia da Universidade de São Paulo, Smithsonian Tropical Research Institute]
     - Jorge W. Moreno-Bernal^[Smithsonian Tropical Research Institute and Universidad del Norte] 
     - Carlos Jaramillo^[Smithsonian Tropical Research Institute, U. Montpellier, and University of Salamanca]
 ---
