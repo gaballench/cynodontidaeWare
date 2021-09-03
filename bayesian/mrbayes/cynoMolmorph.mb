@@ -2,59 +2,63 @@ begin mrbayes;
 [Script documentation carried out using comments]
 
 [log the analysis]
-log start filename = cynoMolmorph.log;
+log start filename=cynoMolmorph.log;
 [read the matrix concatenatedMolmorph.nexus]
 execute concatenatedMolmorph.nexus;
 
 [close analysis at end]
-set autoclose = yes;
+set autoclose=yes;
 [set Acestrorhynchus_microlepis as outgroup]
 outgroup Acestrorhynchus_microlepis;
 [This command shows the status of all the taxa, according to the documentation]
 taxastat;
 
 [definition of individual partitions per marker]
-charset 16S = 1-588;
-charset 18S = 589-915;
-charset ATPase6_8 = 916-1698;
-charset COI = 1699-2203;
-charset CytB = 2204-3040;
-charset Myh6 = 3041-3783;
-charset RAG1 = 3784-5048;
-charset RAG2 = 5049-6061;
-charset morph = 6062-6141;
+charset 16S=1-586;
+charset 18S=587-1127;
+charset ATPase6_8=1128-1910;
+charset COI=1911-2415;
+charset CytB=2416-3252;
+charset Myh6=3253-3954;
+charset RAG1=3955-5219;
+charset RAG2=5220-6232;
+charset morph=6233-6312;
 
 [definition of combined dataset]
-partition combined = 9: 16S, 18S, ATPase6_8, COI, CytB, Myh6, RAG1, RAG2,  morph;
+partition combined=9: 16S, 18S, ATPase6_8, COI, CytB, Myh6, RAG1, RAG2,  morph;
 
 [specification of substitution models]
-set partition = combined;
-lset applyto = (1) nst = 6 rates = propinv; [SYM+I]
-lset applyto = (2) nst = 2; [K80]
-lset applyto = (3) nst = 2 rates = propinv; [HKY+I]
-lset applyto = (4) nst = 2 rates = gamma; [HKY+G]
-lset applyto = (5) nst = 2 rates = propinv; [HKY+I]
-lset applyto = (6) nst = 2; [K80]
-lset applyto = (7) nst = 2; [K80]
-lset applyto = (8) nst = 2; [K80]
-lset applyto = (9) coding = variable; [Lewis2001 model]
+set partition=combined;
+lset applyto=(1) nst=6 rates=gamma; [SYM+G]
+lset applyto=(2) nst=2; [K80]
+lset applyto=(3) nst=2 rates=propinv; [HKY+I]
+lset applyto=(4) nst=2 rates=gamma; [HKY+G]
+lset applyto=(5) nst=2 rates=gamma; [HKY+G]
+lset applyto=(6) nst=2 rates=propinv; [K80+I]
+lset applyto=(7) nst=2 rates=gamma; [K80+G]
+lset applyto=(8) nst=2 rates=gamma; [K80+G]
 
 [unlink parameters across partitions]
-unlink shape = (all) pinvar = (all) statefreq = (all) revmat = (all) tratio = (all);
+unlink shape=(all) pinvar=(all) statefreq=(all) revmat=(all) tratio=(all);
 
-[allow separate gamma parameters for each partition]
+[allow separate gamma parameters for each partition and set the stationary freqs in SYM and K80]
+prset applyto=(1) statefreqpr=fixed(equal); [SYM+G in 16S]
+prset applyto=(2) statefreqpr=fixed(equal); [K80 in 18S]
+prset applyto=(6) statefreqpr=fixed(equal); [K80 in Myh6]
+prset applyto=(7) statefreqpr=fixed(equal); [K80 in RAG1]
+prset applyto=(8) statefreqpr=fixed(equal); [K80 in RAG2]
 prset applyto=(all) ratepr=variable;
 
 [show the model just specified for each partition]
 showmodel;
 
 [set up the MCMC, with this setting the analysis will need not less than 16 threads]
-mcmcp nruns = 2 ngen = 4000000 nchains = 8 samplefreq = 4000 printfreq = 100;
+mcmcp nruns=2 ngen=4000000 nchains=8 samplefreq=4000 printfreq=100;
 [run the MCMC]
 mcmc;
 
 [summarize the posterior trees]
-sumt nruns = 2 relburnin = yes burninfrac = 0.25;
+sumt nruns=2 relburnin=yes burninfrac=0.25;
 plot;
 
 [summarize parameter posteriors]
