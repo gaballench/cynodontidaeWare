@@ -7,7 +7,7 @@
 e-mail: ddarriba@udc.es, dposada@uvigo.es
 --------------------------------------------------------------------------------
  
-Wed Sep 01 20:41:24 BRT 2021
+Fri Sep 03 13:47:05 BRT 2021
 Linux 5.13.13-arch1-1, arch: amd64, bits: 64, numcores: 4
  
 --------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ conditions
 Notice: This program may contain errors. Please inspect results carefully.
  
  
-Arguments = -BIC -d Myh6.fa.renamed.fasta.aligned.fasta.trimmed.fasta -f -i -g 4 -s 3 -t ML -tr 4 -o Myh6.fa.renamed.fasta.aligned.fasta.trimmed.fasta20.41_01_09_2021.out
+Arguments = -BIC -d Myh6.fa.renamed.fasta.aligned.fasta.trimmed.fasta -f -i -g 4 -s 3 -t ML -tr 4 -o Myh6.fa.renamed.fasta.aligned.fasta.trimmed.fasta13.47_03_09_2021.out
 
 Reading data file "Myh6.fa.renamed.fasta.aligned.fasta.trimmed.fasta"... OK.
   number of sequences: 5
@@ -58,30 +58,30 @@ Reading data file "Myh6.fa.renamed.fasta.aligned.fasta.trimmed.fasta"... OK.
  
 Model 		 Exec. Time 	 Total Time 	 -lnL
 -------------------------------------------------------------------------
-HKY+I+G		00h:00:00:04	00h:00:00:04	    1372.7266	 (1/24)
-JC+I+G		00h:00:00:04	00h:00:00:05	    1416.2962	 (2/24)
+HKY+I+G		00h:00:00:04	00h:00:00:05	    1372.7266	 (1/24)
+JC+I+G		00h:00:00:05	00h:00:00:05	    1416.2962	 (2/24)
 F81+I+G		00h:00:00:05	00h:00:00:05	    1408.9359	 (3/24)
 GTR+I+G		00h:00:00:06	00h:00:00:06	    1364.9261	 (4/24)
-F81+G		00h:00:00:02	00h:00:00:07	    1409.0168	 (5/24)
+F81+G		00h:00:00:01	00h:00:00:07	    1409.0168	 (5/24)
 HKY+G		00h:00:00:02	00h:00:00:08	    1372.9405	 (6/24)
 K80+I+G		00h:00:00:04	00h:00:00:09	    1380.3567	 (7/24)
-SYM+I+G		00h:00:00:05	00h:00:00:09	    1374.0276	 (8/24)
-JC+G		00h:00:00:02	00h:00:00:09	    1416.3925	 (9/24)
-GTR+G		00h:00:00:03	00h:00:01:00	    1365.2314	 (10/24)
-F81+I		00h:00:00:01	00h:00:01:00	    1411.9480	 (11/24)
+GTR+G		00h:00:00:03	00h:00:00:09	    1365.2314	 (8/24)
+JC+G		00h:00:00:02	00h:00:01:00	    1416.3925	 (9/24)
+SYM+I+G		00h:00:00:05	00h:00:01:00	    1374.0276	 (10/24)
+F81+I		00h:00:00:01	00h:00:01:01	    1411.9480	 (11/24)
 K80+G		00h:00:00:02	00h:00:01:01	    1380.6933	 (12/24)
-HKY+I		00h:00:00:02	00h:00:01:01	    1372.8090	 (13/24)
-SYM+G		00h:00:00:02	00h:00:01:01	    1374.4020	 (14/24)
-JC+I		00h:00:00:01	00h:00:01:02	    1419.9436	 (15/24)
-F81		00h:00:00:00	00h:00:01:02	    1415.9718	 (16/24)
-K80+I		00h:00:00:01	00h:00:01:03	    1380.5259	 (17/24)
-HKY		00h:00:00:01	00h:00:01:03	    1381.7152	 (18/24)
-GTR+I		00h:00:00:03	00h:00:01:03	    1365.2736	 (19/24)
+SYM+G		00h:00:00:02	00h:00:01:01	    1374.4020	 (13/24)
+JC+I		00h:00:00:01	00h:00:01:01	    1419.9436	 (14/24)
+HKY+I		00h:00:00:02	00h:00:01:02	    1372.8090	 (15/24)
+F81		00h:00:00:01	00h:00:01:03	    1415.9718	 (16/24)
+GTR+I		00h:00:00:02	00h:00:01:03	    1365.2736	 (17/24)
+K80+I		00h:00:00:02	00h:00:01:03	    1380.5259	 (18/24)
+HKY		00h:00:00:01	00h:00:01:03	    1381.7152	 (19/24)
 SYM+I		00h:00:00:02	00h:00:01:03	    1374.4028	 (20/24)
-JC		00h:00:00:00	00h:00:01:03	    1423.6862	 (21/24)
-K80		00h:00:00:01	00h:00:01:04	    1389.5826	 (22/24)
-GTR		00h:00:00:01	00h:00:01:04	    1372.6128	 (23/24)
-SYM		00h:00:00:01	00h:00:01:04	    1382.3335	 (24/24)
+JC		00h:00:00:01	00h:00:01:04	    1423.6862	 (21/24)
+SYM		00h:00:00:01	00h:00:01:04	    1382.3335	 (22/24)
+GTR		00h:00:00:01	00h:00:01:05	    1372.6128	 (23/24)
+K80		00h:00:00:00	00h:00:01:05	    1389.5826	 (24/24)
  
    Model = JC
    partition = 000000
@@ -333,7 +333,7 @@ SYM		00h:00:00:01	00h:00:01:04	    1382.3335	 (24/24)
  
   Best-fit models should be reoptimized for comparison with unconstrained likelihood
  
-Computation of likelihood scores completed. It took 00h:00:01:04.
+Computation of likelihood scores completed. It took 00h:00:01:05.
  
 
 
@@ -401,7 +401,7 @@ There are 24 models in the 100% confidence interval: [ K80+I K80+G HKY+I HKY+G K
  
 * BIC MODEL SELECTION : Best Model's command line
  
-phyml  -i /tmp/jmodeltest7639541329681683564.phy -d nt -n 1 -b 0 --run_id K80+I -m 010010 -f 0.25,0.25,0.25,0.25 -v e -c 1 --no_memory_check --r_seed 12345 -o tlr -s BEST
+phyml  -i /tmp/jmodeltest8053083922355645708.phy -d nt -n 1 -b 0 --run_id K80+I -m 010010 -f 0.25,0.25,0.25,0.25 -v e -c 1 --no_memory_check --r_seed 12345 -o tlr -s BEST
  
  
  

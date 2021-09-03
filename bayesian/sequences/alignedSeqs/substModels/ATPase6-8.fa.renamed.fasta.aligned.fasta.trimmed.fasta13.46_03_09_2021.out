@@ -7,8 +7,8 @@
 e-mail: ddarriba@udc.es, dposada@uvigo.es
 --------------------------------------------------------------------------------
  
-Tue May 05 12:01:30 BRT 2020
-Linux 4.15.0-99-generic, arch: amd64, bits: 64, numcores: 4
+Fri Sep 03 13:46:45 BRT 2021
+Linux 5.13.13-arch1-1, arch: amd64, bits: 64, numcores: 4
  
 --------------------------------------------------------------------------------
 Citation: Darriba D, Taboada GL, Doallo R and Posada D. 2012.
@@ -25,7 +25,7 @@ conditions
 Notice: This program may contain errors. Please inspect results carefully.
  
  
-Arguments = -BIC -d ATPase6-8.fa.renamed.fasta.aligned.fasta.trimmed.fasta -f -i -g 4 -s 3 -t ML -tr 4 -o ATPase6-8.fa.renamed.fasta.aligned.fasta.trimmed.fasta12.01_05_05_2020.out
+Arguments = -BIC -d ATPase6-8.fa.renamed.fasta.aligned.fasta.trimmed.fasta -f -i -g 4 -s 3 -t ML -tr 4 -o ATPase6-8.fa.renamed.fasta.aligned.fasta.trimmed.fasta13.46_03_09_2021.out
 
 Reading data file "ATPase6-8.fa.renamed.fasta.aligned.fasta.trimmed.fasta"... OK.
   number of sequences: 4
@@ -58,30 +58,30 @@ Reading data file "ATPase6-8.fa.renamed.fasta.aligned.fasta.trimmed.fasta"... OK
  
 Model 		 Exec. Time 	 Total Time 	 -lnL
 -------------------------------------------------------------------------
-JC+I+G		00h:00:00:06	00h:00:00:06	    2889.0264	 (1/24)
-F81+I+G		00h:00:00:08	00h:00:00:08	    2819.3342	 (2/24)
-SYM+I+G		00h:00:01:05	00h:00:02:03	    2750.4049	 (3/24)
-K80+I+G		00h:00:01:07	00h:00:02:03	    2786.2305	 (4/24)
-F81+G		00h:00:00:03	00h:00:02:06	    2819.3827	 (5/24)
-HKY+I+G		00h:00:02:06	00h:00:02:06	    2706.3348	 (6/24)
-JC+G		00h:00:00:02	00h:00:03:00	    2889.8489	 (7/24)
-K80+G		00h:00:00:06	00h:00:03:06	    2786.2349	 (8/24)
-HKY+G		00h:00:01:04	00h:00:03:07	    2708.4112	 (9/24)
-F81+I		00h:00:00:01	00h:00:03:08	    2821.3627	 (10/24)
-HKY+I		00h:00:00:03	00h:00:04:02	    2707.0367	 (11/24)
-SYM+G		00h:00:00:09	00h:00:04:05	    2750.9555	 (12/24)
-GTR+G		00h:00:01:09	00h:00:04:06	    2702.1812	 (13/24)
-JC+I		00h:00:00:01	00h:00:04:06	    2889.9458	 (14/24)
-GTR+I+G		00h:00:04:07	00h:00:04:07	    2701.1149	 (15/24)
-K80+I		00h:00:00:02	00h:00:04:08	    2786.9783	 (16/24)
-F81		00h:00:00:01	00h:00:04:09	    2846.4104	 (17/24)
-HKY		00h:00:00:01	00h:00:04:09	    2758.6555	 (18/24)
-JC		00h:00:00:01	00h:00:05:00	    2910.2710	 (19/24)
-GTR		00h:00:00:02	00h:00:05:00	    2740.9864	 (20/24)
-K80		00h:00:00:01	00h:00:05:01	    2818.6226	 (21/24)
-GTR+I		00h:00:00:09	00h:00:05:01	    2701.1270	 (22/24)
-SYM+I		00h:00:00:05	00h:00:05:01	    2750.4517	 (23/24)
-SYM		00h:00:00:01	00h:00:05:02	    2778.9879	 (24/24)
+JC+I+G		00h:00:00:04	00h:00:00:04	    2889.0264	 (1/24)
+F81+I+G		00h:00:00:05	00h:00:00:05	    2819.3342	 (2/24)
+K80+I+G		00h:00:01:01	00h:00:01:05	    2786.2305	 (3/24)
+F81+G		00h:00:00:03	00h:00:01:08	    2819.3827	 (4/24)
+HKY+I+G		00h:00:01:09	00h:00:01:09	    2706.3348	 (5/24)
+SYM+I+G		00h:00:01:07	00h:00:02:02	    2750.4044	 (6/24)
+JC+G		00h:00:00:01	00h:00:02:04	    2889.8489	 (7/24)
+K80+G		00h:00:00:04	00h:00:02:07	    2786.2349	 (8/24)
+HKY+G		00h:00:00:09	00h:00:02:08	    2708.4112	 (9/24)
+F81+I		00h:00:00:01	00h:00:02:09	    2821.3627	 (10/24)
+HKY+I		00h:00:00:02	00h:00:03:01	    2707.0367	 (11/24)
+SYM+G		00h:00:00:06	00h:00:03:03	    2750.9555	 (12/24)
+GTR+I+G		00h:00:03:03	00h:00:03:03	    2701.1148	 (13/24)
+JC+I		00h:00:00:01	00h:00:03:04	    2889.9458	 (14/24)
+K80+I		00h:00:00:01	00h:00:03:05	    2786.9783	 (15/24)
+GTR+G		00h:00:01:06	00h:00:03:05	    2702.1812	 (16/24)
+F81		00h:00:00:01	00h:00:03:05	    2846.4104	 (17/24)
+HKY		00h:00:00:01	00h:00:03:06	    2758.6555	 (18/24)
+GTR		00h:00:00:01	00h:00:03:06	    2740.9864	 (19/24)
+JC		00h:00:00:01	00h:00:03:07	    2910.2710	 (20/24)
+GTR+I		00h:00:00:06	00h:00:03:07	    2701.1269	 (21/24)
+K80		00h:00:00:01	00h:00:03:07	    2818.6226	 (22/24)
+SYM		00h:00:00:01	00h:00:03:08	    2778.9879	 (23/24)
+SYM+I		00h:00:00:04	00h:00:03:08	    2750.4517	 (24/24)
  
    Model = JC
    partition = 000000
@@ -223,11 +223,11 @@ SYM		00h:00:00:01	00h:00:05:02	    2778.9879	 (24/24)
    partition = 012345
    -lnL = 2778.9879
    K = 11
-   R(a) [AC] =  74.5940
-   R(b) [AG] =  126.4267
-   R(c) [AT] =  53.1512
+   R(a) [AC] =  74.5939
+   R(b) [AG] =  126.4265
+   R(c) [AT] =  53.1511
    R(d) [CG] =  20.6349
-   R(e) [CT] =  198.3931
+   R(e) [CT] =  198.3928
    R(f) [GT] =  1.0000 
  
    Model = SYM+I
@@ -246,26 +246,26 @@ SYM		00h:00:00:01	00h:00:05:02	    2778.9879	 (24/24)
    partition = 012345
    -lnL = 2750.9555
    K = 12
-   R(a) [AC] =  72516.6558
-   R(b) [AG] =  127647.3883
-   R(c) [AT] =  44561.4965
-   R(d) [CG] =  11356.9477
-   R(e) [CT] =  255250.9996
+   R(a) [AC] =  72518.5990
+   R(b) [AG] =  127625.7142
+   R(c) [AT] =  44557.3054
+   R(d) [CG] =  11356.2016
+   R(e) [CT] =  255262.0512
    R(f) [GT] =  1.0000
    gamma shape = 0.5750 
  
    Model = SYM+I+G
    partition = 012345
-   -lnL = 2750.4049
+   -lnL = 2750.4043
    K = 13
-   R(a) [AC] =  55492.3455
-   R(b) [AG] =  100989.3132
-   R(c) [AT] =  40247.4861
-   R(d) [CG] =  11482.4064
-   R(e) [CT] =  213452.8696
+   R(a) [AC] =  54598.3305
+   R(b) [AG] =  99382.3979
+   R(c) [AT] =  39645.6596
+   R(d) [CG] =  11340.1200
+   R(e) [CT] =  210096.3275
    R(f) [GT] =  1.0000
-   p-inv = 0.3820
-   gamma shape = 5.6340 
+   p-inv = 0.3830
+   gamma shape = 5.7860 
  
    Model = GTR
    partition = 012345
@@ -284,56 +284,56 @@ SYM		00h:00:00:01	00h:00:05:02	    2778.9879	 (24/24)
  
    Model = GTR+I
    partition = 012345
-   -lnL = 2701.1270
+   -lnL = 2701.1269
    K = 15
    freqA = 0.2883 
    freqC = 0.3173 
    freqG = 0.1202 
    freqT = 0.2742 
-   R(a) [AC] =  12626.1862
-   R(b) [AG] =  78414.3697
-   R(c) [AT] =  14303.2605
-   R(d) [CG] =  7986.9563
-   R(e) [CT] =  78730.3843
+   R(a) [AC] =  12615.0439
+   R(b) [AG] =  78422.3933
+   R(c) [AT] =  14305.5438
+   R(d) [CG] =  7982.5688
+   R(e) [CT] =  78714.3334
    R(f) [GT] =  1.0000
    p-inv = 0.4790 
  
    Model = GTR+G
    partition = 012345
-   -lnL = 2702.1811
+   -lnL = 2702.1812
    K = 15
    freqA = 0.2849 
    freqC = 0.3114 
    freqG = 0.1211 
    freqT = 0.2825 
-   R(a) [AC] =  15874.8711
-   R(b) [AG] =  85639.3416
-   R(c) [AT] =  10136.5964
-   R(d) [CG] =  4964.4958
-   R(e) [CT] =  74026.5756
+   R(a) [AC] =  15883.9804
+   R(b) [AG] =  85705.3153
+   R(c) [AT] =  10149.1334
+   R(d) [CG] =  4972.3149
+   R(e) [CT] =  74072.2357
    R(f) [GT] =  1.0000
    gamma shape = 0.3760 
  
    Model = GTR+I+G
    partition = 012345
-   -lnL = 2701.1149
+   -lnL = 2701.1148
    K = 16
    freqA = 0.2883 
-   freqC = 0.3169 
+   freqC = 0.3170 
    freqG = 0.1199 
-   freqT = 0.2749 
-   R(a) [AC] =  12743.9847
-   R(b) [AG] =  79512.2662
-   R(c) [AT] =  13526.0180
-   R(d) [CG] =  7402.1479
-   R(e) [CT] =  78787.6362
+   freqT = 0.2748 
+   R(a) [AC] =  12732.0266
+   R(b) [AG] =  79494.1588
+   R(c) [AT] =  13548.6527
+   R(d) [CG] =  7406.5478
+   R(e) [CT] =  78775.4602
    R(f) [GT] =  1.0000
    p-inv = 0.4700
-   gamma shape = 9.9830 
+   gamma shape = 10.1230 
  
   Best-fit models should be reoptimized for comparison with unconstrained likelihood
  
-Computation of likelihood scores completed. It took 00h:00:05:02.
+Computation of likelihood scores completed. It took 00h:00:03:08.
  
 
 
@@ -358,7 +358,7 @@ Computation of likelihood scores completed. It took 00h:00:05:02.
    kappa = 9.0433 (ti/tv = 4.5062)
    p-inv = 0.4940 
  
-Tree for the best BIC model = (Acestrorhynchus_falcirostris:0.29143159,Acestrorhynchus_microlepis:0.34722462,(Hydrolycus_scomberoides:0.25575179,Rhaphiodon_vulpinus:0.17881734):0.38379385);
+Tree for the best BIC model = (Acestrorhynchus_falcirostris:0.29143158,Acestrorhynchus_microlepis:0.34722461,(Hydrolycus_scomberoides:0.25575179,Rhaphiodon_vulpinus:0.17881733):0.38379384);
  
  
 * BIC MODEL SELECTION : Selection uncertainty
@@ -368,14 +368,14 @@ Model             -lnL    K      BIC       delta       weight   cumWeight
 HKY+I       2707.03672   11  5487.367900   0.000000    0.754205   0.754205 
 HKY+G       2708.41122   11  5490.116900   2.749000    0.190788   0.944993 
 HKY+I+G     2706.33484   12  5492.627272   5.259373    0.054379   0.999372 
-GTR+I       2701.12699   15  5502.200970  14.833071    0.000453   0.999826 
-GTR+G       2702.18115   15  5504.309290  16.941391    0.000158   0.999984 
-GTR+I+G     2701.11494   16  5508.840003  21.472103   1.64e-005   1.000000 
+GTR+I       2701.12693   15  5502.200850  14.832951    0.000453   0.999826 
+GTR+G       2702.18122   15  5504.309430  16.941531    0.000158   0.999984 
+GTR+I+G     2701.11480   16  5508.839723  21.471823   1.64e-005   1.000000 
 GTR         2740.98636   14  5575.256578  87.888678   6.20e-020   1.000000 
 SYM+I       2750.45173   12  5580.861052  93.493153   3.76e-021   1.000000 
-SYM+G       2750.95552   12  5581.868632  94.500733   2.27e-021   1.000000 
+SYM+G       2750.95553   12  5581.868652  94.500753   2.27e-021   1.000000 
 HKY         2758.65553   10  5583.942387  96.574487   8.07e-022   1.000000 
-SYM+I+G     2750.40487   13  5587.430465  100.062565   1.41e-022   1.000000 
+SYM+I+G     2750.40435   13  5587.429425  100.061525   1.41e-022   1.000000 
 K80+G       2786.23492    8  5625.774902  138.407002   6.65e-031   1.000000 
 K80+I       2786.97833    8  5627.261722  139.893822   3.16e-031   1.000000 
 SYM         2778.98791   11  5631.270280  143.902380   4.26e-032   1.000000 
@@ -405,7 +405,7 @@ There are 24 models in the 100% confidence interval: [ HKY+I HKY+G HKY+I+G GTR+I
  
 * BIC MODEL SELECTION : Best Model's command line
  
-phyml  -i /tmp/jmodeltest9066400227622871655.phy -d nt -n 1 -b 0 --run_id HKY+I -m 010010 -f m -v e -c 1 --no_memory_check --r_seed 12345 -o tlr -s BEST
+phyml  -i /tmp/jmodeltest1989198864505519577.phy -d nt -n 1 -b 0 --run_id HKY+I -m 010010 -f m -v e -c 1 --no_memory_check --r_seed 12345 -o tlr -s BEST
  
  
  

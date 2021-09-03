@@ -7,7 +7,7 @@
 e-mail: ddarriba@udc.es, dposada@uvigo.es
 --------------------------------------------------------------------------------
  
-Wed Sep 01 20:41:27 BRT 2021
+Fri Sep 03 13:47:08 BRT 2021
 Linux 5.13.13-arch1-1, arch: amd64, bits: 64, numcores: 4
  
 --------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ conditions
 Notice: This program may contain errors. Please inspect results carefully.
  
  
-Arguments = -BIC -d RAG1.fa.renamed.fasta.aligned.fasta.trimmed.fasta -f -i -g 4 -s 3 -t ML -tr 4 -o RAG1.fa.renamed.fasta.aligned.fasta.trimmed.fasta20.41_01_09_2021.out
+Arguments = -BIC -d RAG1.fa.renamed.fasta.aligned.fasta.trimmed.fasta -f -i -g 4 -s 3 -t ML -tr 4 -o RAG1.fa.renamed.fasta.aligned.fasta.trimmed.fasta13.47_03_09_2021.out
 
 Reading data file "RAG1.fa.renamed.fasta.aligned.fasta.trimmed.fasta"... OK.
   number of sequences: 6
@@ -58,30 +58,30 @@ Reading data file "RAG1.fa.renamed.fasta.aligned.fasta.trimmed.fasta"... OK.
  
 Model 		 Exec. Time 	 Total Time 	 -lnL
 -------------------------------------------------------------------------
-HKY+I+G		00h:00:00:08	00h:00:00:08	    2660.4789	 (1/24)
-F81+I+G		00h:00:00:09	00h:00:00:09	    2715.0008	 (2/24)
-JC+I+G		00h:00:01:00	00h:00:01:00	    2716.5686	 (3/24)
-F81+G		00h:00:00:03	00h:00:01:03	    2715.1350	 (4/24)
-GTR+I+G		00h:00:01:03	00h:00:01:03	    2652.3729	 (5/24)
+HKY+I+G		00h:00:00:09	00h:00:01:00	    2660.4789	 (1/24)
+F81+I+G		00h:00:01:01	00h:00:01:01	    2715.0008	 (2/24)
+JC+I+G		00h:00:01:01	00h:00:01:01	    2716.5686	 (3/24)
+F81+G		00h:00:00:03	00h:00:01:04	    2715.1350	 (4/24)
+GTR+I+G		00h:00:01:05	00h:00:01:05	    2652.3729	 (5/24)
 K80+I+G		00h:00:00:08	00h:00:01:07	    2661.9554	 (6/24)
-HKY+G		00h:00:00:04	00h:00:01:07	    2660.8667	 (7/24)
-GTR+G		00h:00:00:05	00h:00:01:08	    2652.7954	 (8/24)
-JC+G		00h:00:00:03	00h:00:02:00	    2716.7009	 (9/24)
-F81+I		00h:00:00:01	00h:00:02:01	    2719.6110	 (10/24)
-K80+G		00h:00:00:04	00h:00:02:02	    2662.3162	 (11/24)
-SYM+G		00h:00:00:05	00h:00:02:04	    2655.8847	 (12/24)
-SYM+I+G		00h:00:01:05	00h:00:02:04	    2655.4914	 (13/24)
-HKY+I		00h:00:00:04	00h:00:02:05	    2660.9940	 (14/24)
-JC+I		00h:00:00:02	00h:00:02:06	    2721.2073	 (15/24)
-F81		00h:00:00:01	00h:00:02:07	    2726.4951	 (16/24)
-HKY		00h:00:00:01	00h:00:02:08	    2675.5277	 (17/24)
-K80+I		00h:00:00:04	00h:00:02:08	    2662.4412	 (18/24)
-GTR+I		00h:00:00:07	00h:00:02:08	    2652.9206	 (19/24)
-JC		00h:00:00:01	00h:00:02:09	    2728.1229	 (20/24)
-GTR		00h:00:00:01	00h:00:03:00	    2669.2637	 (21/24)
-K80		00h:00:00:01	00h:00:03:00	    2676.8797	 (22/24)
-SYM		00h:00:00:01	00h:00:03:01	    2672.1555	 (23/24)
-SYM+I		00h:00:00:06	00h:00:03:01	    2655.9977	 (24/24)
+HKY+G		00h:00:00:04	00h:00:01:08	    2660.8667	 (7/24)
+JC+G		00h:00:00:03	00h:00:02:00	    2716.7009	 (8/24)
+GTR+G		00h:00:00:05	00h:00:02:00	    2652.7954	 (9/24)
+F81+I		00h:00:00:01	00h:00:02:02	    2719.6110	 (10/24)
+K80+G		00h:00:00:04	00h:00:02:03	    2662.3162	 (11/24)
+SYM+G		00h:00:00:06	00h:00:02:07	    2655.8847	 (12/24)
+HKY+I		00h:00:00:05	00h:00:02:07	    2660.9940	 (13/24)
+SYM+I+G		00h:00:01:06	00h:00:02:07	    2655.4914	 (14/24)
+JC+I		00h:00:00:01	00h:00:02:08	    2721.2073	 (15/24)
+F81		00h:00:00:01	00h:00:02:09	    2726.4951	 (16/24)
+GTR+I		00h:00:00:07	00h:00:03:00	    2652.9206	 (17/24)
+HKY		00h:00:00:01	00h:00:03:00	    2675.5277	 (18/24)
+K80+I		00h:00:00:04	00h:00:03:01	    2662.4412	 (19/24)
+JC		00h:00:00:01	00h:00:03:01	    2728.1229	 (20/24)
+GTR		00h:00:00:02	00h:00:03:01	    2669.2637	 (21/24)
+K80		00h:00:00:01	00h:00:03:02	    2676.8797	 (22/24)
+SYM+I		00h:00:00:06	00h:00:03:02	    2655.9977	 (23/24)
+SYM		00h:00:00:01	00h:00:03:02	    2672.1555	 (24/24)
  
    Model = JC
    partition = 000000
@@ -333,7 +333,7 @@ SYM+I		00h:00:00:06	00h:00:03:01	    2655.9977	 (24/24)
  
   Best-fit models should be reoptimized for comparison with unconstrained likelihood
  
-Computation of likelihood scores completed. It took 00h:00:03:01.
+Computation of likelihood scores completed. It took 00h:00:03:02.
  
 
 
@@ -401,7 +401,7 @@ There are 24 models in the 100% confidence interval: [ K80+G K80+I K80+I+G SYM+G
  
 * BIC MODEL SELECTION : Best Model's command line
  
-phyml  -i /tmp/jmodeltest7408928511172653256.phy -d nt -n 1 -b 0 --run_id K80+G -m 010010 -f 0.25,0.25,0.25,0.25 -c 4 -a e --no_memory_check --r_seed 12345 -o tlr -s BEST
+phyml  -i /tmp/jmodeltest3222177069294850918.phy -d nt -n 1 -b 0 --run_id K80+G -m 010010 -f 0.25,0.25,0.25,0.25 -c 4 -a e --no_memory_check --r_seed 12345 -o tlr -s BEST
  
  
  

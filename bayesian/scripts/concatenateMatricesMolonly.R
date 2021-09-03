@@ -1,11 +1,9 @@
-source("scripts/concatNexus.R")
-
 path <- "sequences/alignedSeqs/substModels/nexus"
 pattern <- "trimmed.nex$"
-
-concatNexus(pattern = pattern,
-            path = path, 
-            filename = paste(path, "concatenatedMolonly.nexus", sep = "/"),
-            morpho = FALSE,
-            morphoFilename = "morpho", 
-            sumFilename = paste(path, "partitionsMolonly.txt", sep = "/"))
+ 
+tbea::concatNexus(matrices = NULL, pattern = pattern,
+                  filename = paste(path, "concatenatedMolonly.nexus", sep = "/"),
+                  path = path, 
+                  morpho = FALSE,
+                  morphoFilename = "morpho",
+                  sumFilename = "partitionsMolonly.txt")

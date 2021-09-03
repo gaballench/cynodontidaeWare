@@ -1,6 +1,6 @@
 "file"	"start"	"end"
 "sequences/alignedSeqs/substModels/nexus/16S.fa.renamed.aligned.trimmed.nex"	1	586
-"sequences/alignedSeqs/substModels/nexus/18Snew.fa.renamed.aligned.trimmed.nex"	587	1127
+"sequences/alignedSeqs/substModels/nexus/18S.fa.renamed.aligned.trimmed.nex"	587	1127
 "sequences/alignedSeqs/substModels/nexus/ATPase6-8.fa.renamed.aligned.trimmed.nex"	1128	1910
 "sequences/alignedSeqs/substModels/nexus/COI.fa.renamed.aligned.trimmed.nex"	1911	2415
 "sequences/alignedSeqs/substModels/nexus/CytB.fa.renamed.aligned.trimmed.nex"	2416	3252
