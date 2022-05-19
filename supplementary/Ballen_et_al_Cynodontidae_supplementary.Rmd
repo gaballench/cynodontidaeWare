@@ -1,0 +1,1407 @@
+---
+title: "The fossil record of sabre-tooth characins (Teleostei: Characiformes: Cynodontinae), their phylogenetic relationships and palaeobiogeographical implications"
+subtitle: "Supplementary material"
+author: 
+    - Gustavo A. Ballen^[Museu de Zoologia da Universidade de São Paulo, Smithsonian Tropical Research Institute, Queen Mary University of London]
+    - Jorge W. Moreno-Bernal^[Smithsonian Tropical Research Institute and Universidad del Norte] 
+    - Carlos Jaramillo^[Smithsonian Tropical Research Institute, U. Montpellier, and University of Salamanca]
+output: 
+    pdf_document:
+        number_sections: true
+        citation_package: natbib
+        keep_tex: true
+        keep_md: true
+urlcolor: blue
+toc: true
+biblio-style: apalike
+bibliography: PhDThesis.bib
+header-includes: 
+- \usepackage{longtable}
+- \usepackage{lscape}
+- \renewcommand{\thesection}{S\arabic{section}}
+- \renewcommand{\thetable}{S\arabic{table}}
+- \renewcommand{\thefigure}{S\arabic{figure}}
+- \usepackage{multicol}
+---
+
+```{r setup, echo = FALSE}
+library(magrittr)
+#library(kableExtra)
+library(knitr)
+library(ape)
+library(apex)
+library(seqinr)
+knit_hooks$set(small.mar = function(before, options, envir) {
+    if (before)    par(mar=c(5,4,1,1)+.1)  # smaller margin on top and right
+})
+knitr::opts_chunk$set(tidy = TRUE, small.mar = TRUE, comment = "")
+```
+
+# Parsimony analysis
+
+## Phylogenetic analysis
+
+### Dependencies
+
+Please note that in order to run these scripts and reproduce the results you will need:
+
+\begin{itemize}
+\item TNT v.1.5 or higher for phylogenetic analysis, support statistics calculation, and tree production. Freely available at \url{http://www.lillo.org.ar/phylogeny/tnt/}. Please keep in mind that TNT starts numbering from 0, see below.
+\item R v.3.3.1 or higher for tree format conversion. Freely available at \url{https://www.r-project.org/}.
+\item (Optional) FigTree v.1.4.2 or higher for tree edition
+\item (Optional) Inkscape 0.91 or higher for fine graphical edition of the trees.
+\end{itemize}
+
+### Fast run
+
+On a UNIX system just run the \texttt{automaticPipeline} script. This can be achieved by running the command \texttt{bash automaticPipeline} or \texttt{bash ./automaticPipeline}. This script will return no visual output to the screen by itself but will show some internal TNT messages during bootstraping. These will disappear from the screen after running. The tree file format conversion is completely silent. After running you will have the output files described below. This alternative is designed for fast runs without going through each individual file.
+
+Further details and comments are found in each script for those interested.
+
+### Input files
+
+These files must be run following these instructions. These are specific for command-line TNT:
+
+\begin{itemize}
+\item Navigate to the path where the files are located,\texttt{cd PATH} for Unix users.
+\item Run TNT on the background with the command\texttt{tnt bground p complete.run}. Please note that the script was designed as a stand-alone tool so once called from TNT it will exit once the analysis has finished. See the file\texttt{complete.run} file for further comments and detailed explanation of each step in the phylogenetic analysis and construction of the output tree in .tre format.
+\item If there are already output files these will be rewritten by TNT with the respective warning being recorded in the\texttt{complete.out} output file. Otherwise such file should not contain any warning.
+\end{itemize}
+
+\texttt{\textbf{complete.tnt}}
+
+This file contains the data matrix in tnt format. The penultimate line of the file contains the instruction\texttt{collapse [;} in order to collapse branches supported by no apomorphies, contrary to the default in TNT that always presents a dichotomous result. 
+
+\texttt{\textbf{complete.run}}
+
+Script for carrying out the analysis, it contains the following steps as already documented inside the script:
+
+\begin{itemize}
+\item Tell TNT to use 1 Gb of RAM and store a large number of tree in memory.
+\item Save all output to \texttt{complete.out}
+\item Read the matrix \texttt{complete.tnt}
+\item Initialize the output tree file \texttt{complete.tre}
+\item Set outgroup to \texttt{Acestrorhynchus}
+\item Use implicit enumeration for exact search
+\item Plot the most-parsimonious tree (in this case, there was only one MPT) along with node numbers
+\item Initialize tree annotation
+\item Calculate CI and RI using the \texttt{STATSALL.RUN} script
+\item Calculate bootstrap statistics
+\item Calculate jackknife statistics
+\item Save annotations to tree file in parenthetical notation
+\item Plot MPT to log file
+\item Close tree file
+\item List synapomorphies for each clade. Please note that TNT starts numbering from 0, so you will need to edit the synapomorphies list by adding 1 to all node AND character numbers (e.g., Node 0 is actually node 1, and character 76 is actually character 77). 
+\item Close log file
+\item Close TNT
+\end{itemize}
+
+\texttt{\textbf{STATSALL.RUN}}
+
+This script was developed by Peterson Lopes (Universidade de São Paulo) and is available in a number of sources over the internet. For reproducibility purporses I am linking to a thread in the TNT user group on google where such file can be found. Unfortunately there seems to be no official source for this script since the TNT wiki website became unavailable a couple years ago. The script can be found here \url{https://groups.google.com/d/msg/tnt-tree-analysis-using-new-technology/qPdCzlk_at8/YusQvlXCahwJ}. I claim NO AUTHORSHIP for this script. Please contact Peterson Lopes directly for further information.
+
+### Output files
+
+The script \texttt{complete.run} generates the following files as already noted. Tree edition was done in FigTree (\url{http://tree.bio.ed.ac.uk/software/figtree/}) and fine-edited with Inkscape.
+
+\texttt{\textbf{complete.out}}
+
+This file contains every output generated during analysis including graphic output such as trees and statistics. It will also contain any warning generated during analysis. Further information aside from graphic cladograms can be found here.
+
+\texttt{\textbf{complete.tre}}
+
+This file contains the output tree file to be converted to newick format in R (see below). Without any reformatting, this file can only be opened by TNT.
+
+### TNT tree format conversion
+
+An additional step is required before the \texttt{complete.tre} file can be edited in FigTree, given that TNT's output tree format differs from a newick standard format. An R script was designed for carrying out format conversion automatically.
+
+In order to use the tree file you need to use the function\texttt{tbea::tnt2newick())} in the R console for conversion from TNT to newick format. Afterwards you are ready for converting between to newick format with the \texttt{treToNewick} function. Finally, you can open the .newick file in FigTree. Please keep in mind that the tree file has support values as annotations, so when opening FigTree you will be asked to name the labels (the defaul name labels is enough) so that you can activate them in the 'labels' section of FigTree.
+
+You will need to install the [\texttt{tbea}](https://github.com/gaballench/tbea) R package in order to use the function tnt2newick, load the package, and call the function:
+
+```{r, eval = FALSE}
+devtools::install_github("gaballench/tbea")
+library(tbea)
+tnt2newick("my_TNT_tree_file.tre", "my_TNT_tree_file.newick")
+```
+
+Please see the documentation \texttt{help(tnt2newick)} in the R console for further details.
+
+### Final steps
+
+After obtaining a .newick file you will be ready to edit the tree in FigTree in order to add annotations, change fonts, colors, and some other basic edition tasks. For a fully edited and good-looking tree it is suggested to save the tree in the vectorial svg format and then to further edit it with Inkscape. This way the cladogram published in the paper can be obtained.
+
+## \texttt{complete.run}
+
+\begin{scriptsize}
+\begin{verbatim}
+macro =;
+
+/* Set max RAM to 1 Gb*/
+mxram 1000;
+
+/* Collapse all unsupported branches*/
+collapse [;
+
+/* 
+Save all the output to the file 'complete.out'
+It can be opened in any text editor
+ */
+log complete.out;
+
+/*
+Read the matrix 'complete.tnt'
+*/
+proc complete.tnt;
+
+/*
+Number of trees to be held in memory
+*/
+hold 1000000;
+
+/*
+Set random seed
+*/
+rseed 0;
+
+/*
+Open tree file in parenthetical notation
+*/
+tsave * complete.tre;
+
+/*
+Set the composite taxon 'Outgroup' as the root
+*/
+outgroup Acestrorhynchus;
+
+/*
+Given the number of taxa, carry out an exact search
+with implicit enumeration
+*/
+ienum;
+
+/*
+Taxon names ON
+*/
+taxname =;
+
+/*
+Plot MPT with node numbers
+*/
+naked -;
+tplot /;
+naked =;
+
+/*
+Tree tags ON
+*/
+ttags =;
+
+/*
+Overall CI and RI
+*/
+run STATSALL.RUN 1;
+
+/*
+Bootstrap and Jackknife branch support values
+*/
+resample boot rep 10000;
+resample jak rep 10000;
+
+/*
+Save tags to tree file in parenthetical notation
+*/
+save *;
+
+/*
+Plot consensus tree to log file
+*/
+tplot /;
+
+/*
+Close tree files
+*/
+tsave /;
+
+/*
+List synapomorphies common to all trees
+*/
+apo -;
+
+/*
+Close log file
+*/
+log /;
+
+/*
+Close TNT
+*/
+quit;
+\end{verbatim}
+\end{scriptsize}
+    
+## \texttt{complete.tnt}
+
+In order to reconstruct the structure of the dataset, cut the character string (e.g., the line with \texttt{???? ... 111} just below \texttt{Hydrolycus\_sp.\_Fossil}) and paste it after the previous line that contains the taxon name (e.g., \texttt{Hydrolycus\_sp.\_Fossil} in this case). The line should then contain the structure: \texttt{taxon\_name} and  \texttt{character\_string} separated by a space (e.g., \texttt{Hydrolycus\_armatus 110210 ... 020}. The matrix includes the characters originally proposed by \citet{Toledo-Piza2000} and the new ones herein proposed.
+
+\begin{scriptsize}
+\begin{verbatim}
+xread
+80 11
+Hydrolycus_MUN_16211    
+?????????????????????????????????????????????????????????????????????111??010111
+H_armatus               
+11021000011111100011001011111110111111111011110001101111110111001100011110011020
+H_tatauaia              
+11021000011111100011001011111110111111111011110001101111110111001100011110011020
+H_wallacei              
+010111?0001111100012011011111110110111011011100001101111110111001100000020000000
+H_scomberoides          
+01021001011111101112141011111110111111111011220001101111110111101101011100010111
+R_vulpinus              
+01101000001111?01212131011111110110111111011311111211011111112002110102120100110
+C_gibbus                
+012010101000110112121211101011111101110121111200111011111111110111000200-1000100
+C_septenarius           
+012010101000110112121211101011111101110121111200111011111111110111000200-1000100
+Acestrorhynchus         
+00000??1000?0000000??1000000?00001000100000000000000000000000000?0000-0000000-20
+Myloplus_schomburgkii   
+0001---10000100110000000000000010000000000000---0000000000000000---0-3--0000--2-
+Serrasalmus_rhombeus    
+0001---10000100110000001000000010000000000000---0000000000000000---0-3--0100--3-
+;
+collapse [;
+proc /;
+\end{verbatim}
+\end{scriptsize}
+
+## \texttt{automaticPipeline.sh}
+
+\begin{scriptsize}
+\begin{verbatim}
+#!/bin/bash
+
+# run the TNT script 'complete.run' on the background. This will carry out the phylogenetic 
+# analysis and draw the annotated cladogram. Please refer to the file 'complete.run' for 
+# further details and comments. 
+tnt bground p complete.run
+
+# Load the 'tbea' package in R and convert the 'complete.tre' output file to the newick format 
+# ('complete.newick'). Afterwards just open it in figtree or your preferred program for tree edition.
+Rscript -e 'library(tbea)' -e 'tnt2newick("complete.tre", "complete.newick", subsetting = FALSE)'
+\end{verbatim}
+\end{scriptsize}
+
+## Results
+
+### Character definitions
+
+Character definitions and character matrix. New characters are numbered from 70 to 80, characters 1 to 69 are from \citet{Toledo-Piza2000}.
+
+\textbf{Character 70}---Dentary, symphyseal teeth, number: 0=two; 1=one; 2=six to seven 
+
+\textbf{Character 71}---Dentary, leading canine, insertion plane: 0=labio-lingual; 1=commisuro-symphyseal; 2=straight, perpendicular to dentary horizontal plane.
+
+\textbf{Character 72}---Dentary, leading canine, texture of lingual surface: 0=smoothly curve; 1=with a sharp and apically distinct cutting edge.
+
+\textbf{Character 73}---Dentary, area posterior to tooth row, accessory teeth postertior to main tooth row: "-"=inapplicable; 0=absent; 1=extensive patch; 2=1-4 teeth in a restricted patch.
+
+\textbf{Character 74}---Dentary-anguloarticular, coronoid process, presence: 0=absent; 1=present.
+
+\textbf{Character 75}---Dentary, lateral sulcus on anterior portion below leading canine, presence: 0=absent; 1=present.
+
+\textbf{Character 76}---Dentary, lateral depresion between leading canine and next hypertrophied canine, presence: 0=absent; 1=present.
+
+\textbf{Character 77}---Dentary, leading canine, base of enameloid, labial surface, texture: 0=smooth, 1=present in the form of parallel/oblique ridges.
+
+\textbf{Character 78}---Dentary, strong canines between leading canine and next hypertrophied canine number: "-"=inapplicable as dentary teeth are of comparable length; 0=1 canine; 1=2 canines.
+
+\textbf{Character 79}---Dentary, anterior margin in lateral view, outline; 0=oblique, 1=straight, 2=round.
+
+\textbf{Character 80}---Dentary, canine between leading canine and next hypertrophied canine, relative position: 0=midway between canines, 1=contiguous to posterior canine.
+
+### List of apomorphies
+
+List of synapomorphies for the most-parsimonious tree. Synapomorphies are listed as transformation series in the form 'Character: plesiomorphic state $\rightarrow$ apomorphic state'. Please note that TNT starts numbering from 0 as is the case in computing in general; however, humans usually start counting from 1 as is the case when presenting characters. In order to preserve the numbering of characters in the literature we have added 1 to each of the characters as reported by TNT, so that character 0 for TNT is actually character 1 in our data matrix (and also character 1 in \citet{Toledo-Piza2000}). Nodes are also numbered starting with 0 in TNT. Given that node numbers are never discussed in the manuscript and the fact that we always refer to clade composition (Cynodontidae is Node 16 but we always will say Cynodontidae instead of Node 16) we are not changing node numbers in the list below. These are given in order to aid the reader when checking the log file where the cladogram is plotted in text mode with node numbers.
+
+\begin{multicols}{2}
+
+\textit{Hydrolycus} MUN 16211: 
+
+No autapomorphies 
+
+\textit{Hydrolycus armatus}: 
+
+No autapomorphies 
+
+\textit{Hydrolycus tatauaia}: 
+
+No autapomorphies 
+
+\textit{Hydrolycus wallacei}: 
+
+Char. 4: 0 $\rightarrow$ 1 
+
+Char. 6: 0 $\rightarrow$ 1 
+
+Char. 17: 1 $\rightarrow$ 0 
+
+Char. 78: 1 $\rightarrow$ 0 
+
+\textit{Hydrolycus scomberoides}: 
+
+No autapomorphies 
+
+\textit{Rhaphiodon vulpinus}: 
+
+Char. 3: 0 $\rightarrow$ 1 
+
+Char. 18: 0 $\rightarrow$ 2 
+
+Char. 45: 1 $\rightarrow$ 3 
+
+Char. 47: 0 $\rightarrow$ 1 
+
+Char. 48: 0 $\rightarrow$ 1 
+
+Char. 49: 0 $\rightarrow$ 1 
+
+Char. 51: 1 $\rightarrow$ 2 
+
+Char. 52: 0 $\rightarrow$ 1 
+
+Char. 53: 1 $\rightarrow$ 0 
+
+Char. 59: 0 $\rightarrow$ 1 
+
+Char. 62: 1 $\rightarrow$ 2 
+
+Char. 65: 1 $\rightarrow$ 2 
+
+Char. 67: 0 $\rightarrow$ 1 
+
+Char. 69: 0 $\rightarrow$ 1 
+
+Char. 75: 0 $\rightarrow$ 1 
+
+\textit{Cynodon gibbus}: 
+
+No autapomorphies 
+
+\textit{Cynodon septenarius}: 
+
+No autapomorphies 
+
+\textit{Acestrorhynchus}:
+
+No autapomorphies 
+
+\textit{Myloplus schomburgkii}:
+
+No autapomorphies 
+
+\textit{Serrasalmus rhombeus}:
+
+Char. 24: 0 $\rightarrow$ 1 
+
+Char. 74: 0 $\rightarrow$ 1 
+
+Char. 79: 2 $\rightarrow$ 3 
+
+\textit{H. scomberoides} + H. MUN 16211 (Node 12): 
+
+Char. 80: 0 $\rightarrow$ 1 
+
+\textit{Hydrolycus} exclusive of \textit{H. wallacei} (Node 13):
+
+Char. 4: 0 $\rightarrow$ 2 
+
+Char. 10: 0 $\rightarrow$ 1 
+
+Char. 35: 0 $\rightarrow$ 1 
+
+Char. 70: 0 $\rightarrow$ 1 
+
+Char. 76: 0 $\rightarrow$ 1 
+
+\textit{Hydrolycus} (excl. \textit{H. wallacei}) + \textit{Rhaphiodon} (Node 14): 
+
+Char. 39: 0 $\rightarrow$ 1 
+
+Char. 46: 0 $\rightarrow$ 1 
+
+Char. 72: 0 $\rightarrow$ 1 
+
+Char. 79: 0 $\rightarrow$ 1 
+
+\textit{H. wallacei} + \textit{Rhaphiodon} + \textit{Hydrolycus} (Node 15): 
+
+Char. 11: 0 $\rightarrow$ 1 
+
+Char. 12: 0 $\rightarrow$ 1 
+
+Char. 15: 0 $\rightarrow$ 1 
+
+Char. 26: 0 $\rightarrow$ 1 
+
+Char. 28: 0 $\rightarrow$ 1 
+
+Cynodontidae (Node 16): 
+
+Char. 2: 0 $\rightarrow$ 1 
+
+Char. 8: 1 $\rightarrow$ 0 
+
+Char. 14: 0 $\rightarrow$ 1 
+
+Char. 19: 0 $\rightarrow$ 1 
+
+Char. 23: 0 $\rightarrow$ 1 
+
+Char. 25: 0 $\rightarrow$ 1 
+
+Char. 27: 0 $\rightarrow$ 1 
+
+Char. 30: 0 $\rightarrow$ 1 
+
+Char. 31: 0 $\rightarrow$ 1 
+
+Char. 33: 0 $\rightarrow$ 1 
+
+Char. 36: 0 $\rightarrow$ 1 
+
+Char. 37: 0 $\rightarrow$ 1 
+
+Char. 40: 0 $\rightarrow$ 1 
+
+Char. 43: 0 $\rightarrow$ 1 
+
+Char. 44: 0 $\rightarrow$ 1 
+
+Char. 45: 0 $\rightarrow$ 1 
+
+Char. 50: 0 $\rightarrow$ 1 
+
+Char. 51: 0 $\rightarrow$ 1 
+
+Char. 53: 0 $\rightarrow$ 1 
+
+Char. 54: 0 $\rightarrow$ 1 
+
+Char. 55: 0 $\rightarrow$ 1 
+
+Char. 56: 0 $\rightarrow$ 1 
+
+Char. 57: 0 $\rightarrow$ 1 
+
+Char. 58: 0 $\rightarrow$ 1 
+
+Char. 60: 0 $\rightarrow$ 1 
+
+Char. 61: 0 $\rightarrow$ 1 
+
+Char. 62: 0 $\rightarrow$ 1 
+
+Char. 79: 2 $\rightarrow$ 0 
+
+Cynodontidae + Serrasalmidae (Node 17): 
+
+No unambiguous synapomorphies 
+
+\textit{H. armatus} + \textit{H. tatauaia} (Node 18): 
+
+Char. 1: 0 $\rightarrow$ 1 
+
+Char. 17: 1 $\rightarrow$ 0 
+
+Char. 20: 2 $\rightarrow$ 1 
+
+Char. 77: 0 $\rightarrow$ 1 
+
+Char. 78: 1 $\rightarrow$ 0 
+
+Char. 79: 1 $\rightarrow$ 2 
+
+\textit{Cynodon} (Node 19):
+
+Char. 3: 0 $\rightarrow$ 2 
+
+Char. 9: 0 $\rightarrow$ 1 
+
+Char. 18: 0 $\rightarrow$ 2 
+
+Char. 22: 01 $\rightarrow$ 2 
+
+Char. 24: 0 $\rightarrow$ 1 
+
+Char. 42: 0 $\rightarrow$ 1 
+
+Char. 46: 0 $\rightarrow$ 2 
+
+Char. 49: 0 $\rightarrow$ 1 
+
+Char. 59: 0 $\rightarrow$ 1 
+
+Char. 64: 0 $\rightarrow$ 1 
+
+Char. 74: 0 $\rightarrow$ 1 
+
+Serrasalmidae (Node 20): 
+
+Char. 4: 0 $\rightarrow$ 1 
+
+Char. 34: 1 $\rightarrow$ 0 
+
+Char. 38: 1 $\rightarrow$ 0 
+
+\end{multicols}
+
+## Characters and dentary anatomy in representatives of the Cynodontidae
+
+Figures \ref{fig:armatusEtal} and \ref{fig:wallaceiEtal} illustrate several of the conditions described in characters 70 to 80.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth]{figures/recentPlates/armatus_scomberoides.pdf}
+	\caption{Dentary bones of all species of \textit{Hydrolycus} and \textit{Rhaphiodon}. \textit{Hydrolycus armatus} in A. anterior, C. occlusal, and E. lateral views. G. detail of the posterior portion of the dentary showing the patch of small teeth. \textit{Hydrolycus scomberoides} in B. anterior, D. occlusal, and F. lateral views. H. showing a slightly oblique view where the single symphysial tooth is more evident. Character states are shown as character:ctaracter-state in all cases}
+  \label{fig:armatusEtal}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth]{figures/recentPlates/tatauaia-wallacei.pdf}
+  \caption{Dentary bones of all species of \textit{Hydrolycus} and \textit{Rhaphiodon}. \textit{Hydrolycus tatauaia} in A. anterior, D. lateral, and H. occlusal views. \textit{Hydrolycus wallacei} in B. anterior, E. lateral, and G. occlusal views. \textit{Rhaphiodon vulpinus} in C. anterior, and F. lateral views. Character states are shown as character:ctaracter-state in all instances}
+  \label{fig:wallaceiEtal}
+\end{figure}
+
+# Bayesian analysis
+
+## Taxon sampling
+
+Selection of sequences for *Acestrorhynchus* follows \citet{Pretti2009} that recovered *A. falcirostris* and *A. microlepis* as the successive most basal species in the genus.
+
+## Marker selection
+
+A first batch of sequences was downloaded using the string:
+
+```{}
+"Cynodon gibbus"[Organism] OR 
+  "Hydrolycus"[Organism] OR 
+  "Rhaphiodon"[Organism] OR 
+  "Acestrorhynchus microlepis"[Organism] OR 
+  "Acestrorhynchus falcirostris"[Organism] AND animals[filter]
+```
+
+In addition, sequences for _Myloplus schomburgkii_ and _Serrasalmus rhombeus_ were retrieved in the same way:
+
+```{}
+"Myloplus schomburgkii"[Organism] OR
+  "Serrasalmus rhombeus"
+```
+
+Next, UGENE was used in order to pick sequences per marker. Given the small original amount of sequences, a survey of representativeness per marker was carried out by picking markers in the sequence title. The following structure was found and allowed to pick a total of nine markers (number of sequences per species between parentheses):
+
+\begin{scriptsize}
+\begin{verbatim}
+C. gibbus                     16S (1),                              cytb (1),          Myh6 (1), NA (2), RAG1 (1), RAG2 (1)
+H. armatus                             EGR1 (1), EGR2B (1), EGR3 (1), NA (2),                            RAG1 (1),                   RH (1)
+H. scomberoides  mitogen.(2), 16S (3), 18S (1),           COI (10), cytb (1),          Myh6 (1),         RAG1 (1), RAG2 (2),         sina (1)
+R. vulpinus                   16S (4), 18S (1), ATP6 (1), COI (15), cytb (1), fkh (1), Myh6 (1), NA (2), RAG1 (1), RAG2 (1), rpS7 (1)
+A. falcirostris               16S (2),          ATP8 (2), COI (6),                                                           rpS7 (2)
+A. microlepis                 16S (4), 18S (2), ATP6-8 (2),                                                                  rpS7 (2)
+
+markers selected: 16S, 18S, ATP6, COI, cytb, Myh6, RAG1, RAG2, rsP7, and the mitogenome for scomberoides in all mitochondrial cases
+\end{verbatim}
+\end{scriptsize}
+
+Posterior to this assessment, sequences of Serrasalmids were selected for most of these markers.
+
+A script in R was used for renamig the sequences so that they started with the species name, then the marker name, and finally the accession number.
+
+```{bash eval = FALSE}
+Rscript scripts/renameAlignments.R
+```
+
+## Sequence manual selection
+
+A single sequence per species per marker was chosen whenever more than one was present. The following list records all the modifications needed:
+
+### _CytB_
+
+- `Hydrolycus_scomberoides_CytB_NC_015813.1` removed as the other mitogenomic sequence was identical.
+- `Hydrolycus_scomberoides_CytB_HQ289558.1` removed as the mitogenome already includes the sequence of CytB
+
+### _COI_
+
+- `Hydrolycus_scomberoides_COI_NC_015813.1` removed in coordination with the choice in CytB.
+- All sequences for Acestrorhynchus falcirostris were identical. Picking the first one `Acestrorhynchus_falcirostris_COI_MG953597.1`
+- From the ten longest sequences of Rhaphiodon vulpinus, all were identical. Picking the first one `Rhaphiodon_vulpinus_COI_GU701527.1`
+
+### _ATPase6-8_
+
+- Picking `Acestrorhynchus_falcirostris_ATPase6-8_FJ468304.1` as it was the longest of both for this species.
+- Removing `Hydrolycus_scomberoides_ATPase6-8_NC_015813.1` for the same reason as in other mitochondrial markers.
+- Picking `Acestrorhynchus_microlepis_ATPase6-8_FJ468311.1` as it was the longest of both for this species.
+
+### _rpS7_
+
+- Picking `Acestrorhynchus_falcirostris_rpS7_FJ409851.1` as it was the longest for that species.
+- Removing `Hydrolycus_scomberoides_rpS7_NC_015813.1` for the same reason as in other mitochondrial markers.
+- Picking `Acestrorhynchus_microlepis_rpS7_FJ409859.1` as it was the longest for that species.
+- Renaming `Rhaphiodon_sp._rpS7_FJ409867.1` to `Rhaphiodon_vulpinus_rpS7_FJ409867.1` as there is only one species of _Rhaphiodon_.
+
+### _RAG2_
+
+- Picking `Hydrolycus_scomberoides_RAG2_AY804088.1` as it was the longest for that species.
+
+### _16S_
+
+- Picking `Hydrolycus_scomberoides_16S_HQ171269.1` as above.
+- Removing all other _H. scommberoides_.
+- Picking `Acestrorhynchus_microlepis_16S_FJ362546.1` as it is the longest sequence.
+- Picking `Rhaphiodon_vulpinus_16S_HQ171303.1` as it is the longest sequence.
+- Picking `Acestrorhynchus_falcirostris_16S_FJ362540.1` as it is the longest sequence.
+
+### _18S_
+
+- Picking `Acestrorhynchus_falcirostris_18S_FJ362540.1` as it is the longest sequence.
+- Picking `Hydrolycus_scomberoides_18S_FJ944806.1` as above.
+- Picking `Acestrorhynchus_microlepis_18S_FJ362546.1` as it is the longest sequence.
+- Picking `Rhaphiodon_vulpinus_18S_HQ171303.1` as it is the longest sequence.
+
+## Sequence alignment
+
+Sequences were aligned with mafft in a server due to extensive use of memory (spent ca. 3-4min running):
+
+```{bash eval = FALSE}
+#!/bin/bash
+# send email indicating that everything started running
+Rscript beginExec.R
+# iterate over the files in order to run mafft on them
+# and name the output files accordingly
+for i in `ls *.fasta`; do
+  mafft --maxiterate 1000 --thread 24 --localpair $i > $i.aligned.fasta
+done
+# send email indicating that everything finished
+Rscript finishExec.R
+```
+
+Manual trimming of alignments was carried out in order to preserve as most as possible from the alignment found with mafft. The steps below were carried out in order to reach the per-marker alingment that will be subject to concatenation downward the analysis.
+
+### _COI_
+
+- Positions 16548--6124 removed as flanking region
+- Positions 5618--1 removed as flanking region
+
+### _APTase6-8_
+
+- Positions 16548--8753 removed as flanking region
+- Positions 7969--1 removed as flanking region
+
+### _16S_
+
+- Positions 608--600 removed as flanking region.
+- Positions 13--1 removed as flanking region.
+
+### _CytB_
+
+- Positions 16548--15428 removed as flanking region.
+- Positions 14590--1 removed as flanking region.
+
+### _RAG2_
+
+- Positions 1224--1110 removed as flanking region.
+- Positions 96--1 removed as flanking region.
+
+### _RAG1_
+
+- Positions 1500--1359 removed as flanking region.
+- Positions 93--1 removed as flanking region.
+
+### _Myh6_
+
+- Positions 752--712 removed as flanking region.
+- Positions 9--1 removed as flanking region.
+
+### _rpS7_
+
+- This marker disintegrated during alignment, removing altogether
+
+### _18S_
+
+- Cynodon gibbus AY523598.1 and Hydrolycus armatus AY523597.1 removed because disintegrated during alignment. 
+- Positions 16560--2601 removed as flanking regions.
+- Positions 2012--1 removed as flanking regions.
+
+## Accession numbers
+
+Finally, the following accession numbers were used for ensambling each taxon:
+
+```{bash}
+cd ../phylo/bayesian/sequences/alignedSeqs/
+grep ">" *.trimmed.fasta | sed 's/.fa.renamed.fasta.aligned.fasta.trimmed.fasta:>/ /g'
+cd ../../../../supplementary
+```
+
+\begin{longtable}[c]{llcc}
+\caption{Accession numbers for the eight molecular markers used in the bayesian phylogenetic analyses.}
+\label{tab:accnums}\\
+\multicolumn{1}{c}{\textbf{Genus}} & \multicolumn{1}{c}{\textbf{Species}} & \textbf{Marker} & \textbf{Accession number} \\
+\endfirsthead
+%
+\endhead
+%
+\textit{Acestrorhynchus}	&	\textit{falcirostris}	&	\textit{16S}	&	FJ362540.1	\\
+\textit{Acestrorhynchus}	&	\textit{falcirostris}	&	\textit{ATPase6}-8	&	FJ468304.1	\\
+\textit{Acestrorhynchus}	&	\textit{falcirostris}	&	\textit{COI}	&	MG953597.1	\\
+\textit{Acestrorhynchus}	&	\textit{microlepis}	&	\textit{16S}	&	FJ362546.1	\\
+\textit{Acestrorhynchus}	&	\textit{microlepis}	&	\textit{18S}	&	FJ944765.1	\\
+\textit{Acestrorhynchus}	&	\textit{microlepis}	&	\textit{ATPase6}-8	&	FJ468311.1	\\
+\textit{Cynodon}	&	\textit{gibbus}	&	\textit{16S}	&	HQ171241.1	\\
+\textit{Cynodon}	&	\textit{gibbus}	&	\textit{CytB}	&	HQ289532.1	\\
+\textit{Cynodon}	&	\textit{gibbus}	&	\textit{Myh6}	&	HQ288951.1	\\
+\textit{Cynodon}	&	\textit{gibbus}	&	\textit{RAG1}	&	HQ289148.1	\\
+\textit{Cynodon}	&	\textit{gibbus}	&	\textit{RAG2}	&	HQ289339.1	\\
+\textit{Hydrolycus}	&	\textit{armatus}	&	\textit{RAG1}	&	JX470045.1	\\
+\textit{Hydrolycus}	&	\textit{scomberoides}	&	\textit{16S}	&	HQ171269.1	\\
+\textit{Hydrolycus}	&	\textit{scomberoides}	&	\textit{18S}	&	FJ944806.1	\\
+\textit{Hydrolycus}	&	\textit{scomberoides}	&	\textit{ATPase6}-8	&	AP011989.1	\\
+\textit{Hydrolycus}	&	\textit{scomberoides}	&	\textit{COI}	&	AP011989.1	\\
+\textit{Hydrolycus}	&	\textit{scomberoides}	&	\textit{CytB}	&	AP011989.1	\\
+\textit{Hydrolycus}	&	\textit{scomberoides}	&	\textit{Myh6}	&	HQ288979.1	\\
+\textit{Hydrolycus}	&	\textit{scomberoides}	&	\textit{RAG1}	&	HQ289176.1	\\
+\textit{Hydrolycus}	&	\textit{scomberoides}	&	\textit{RAG2}	&	AY804088.1	\\
+\textit{Hydrolycus}	&	\textit{scomberoides}	&	\textit{RAG2}	&	HQ289366.1	\\
+\textit{Myloplus}	&	\textit{schomburgkii}	&	\textit{16S}	&	KX087046.1	\\
+\textit{Myloplus}	&	\textit{schomburgkii}	&	\textit{COI}	&	MH411315.1	\\
+\textit{Myloplus}	&	\textit{schomburgkii}	&	\textit{CytB}	&	KX086862.1	\\
+\textit{Myloplus}	&	\textit{schomburgkii}	&	\textit{Myh6}	&	KX086912.1	\\
+\textit{Myloplus}	&	\textit{schomburgkii}	&	\textit{RAG1}	&	KX086965.1	\\
+\textit{Myloplus}	&	\textit{schomburgkii}	&	\textit{RAG2}	&	KX086979.1	\\
+\textit{Rhaphiodon}	&	\textit{vulpinus}	&	\textit{16S}	&	HQ171303.1	\\
+\textit{Rhaphiodon}	&	\textit{vulpinus}	&	\textit{18S}	&	FJ944807.1	\\
+\textit{Rhaphiodon}	&	\textit{vulpinus}	&	\textit{ATPase6}-8	&	FJ468317.1	\\
+\textit{Rhaphiodon}	&	\textit{vulpinus}	&	\textit{COI}	&	GU701527.1	\\
+\textit{Rhaphiodon}	&	\textit{vulpinus}	&	\textit{CytB}	&	HQ289592.1	\\
+\textit{Rhaphiodon}	&	\textit{vulpinus}	&	\textit{Myh6}	&	HQ289013.1	\\
+\textit{Rhaphiodon}	&	\textit{vulpinus}	&	\textit{RAG1}	&	HQ289205.1	\\
+\textit{Rhaphiodon}	&	\textit{vulpinus}	&	\textit{RAG2}	&	HQ289399.1	\\
+\textit{Serrasalmus}	&	\textit{rhombeus}	&	\textit{16S}	&	AY788081.1	\\
+\textit{Serrasalmus}	&	\textit{rhombeus}	&	\textit{18S}	&	FJ944818.1	\\
+\textit{Serrasalmus}	&	\textit{rhombeus}	&	\textit{COI}	&	MZ051158.1	\\
+\textit{Serrasalmus}	&	\textit{rhombeus}	&	\textit{CytB}	&	MT372736.1	\\
+\textit{Serrasalmus}	&	\textit{rhombeus}	&	\textit{Myh6}	&	MT372746.1	\\
+\textit{Serrasalmus}	&	\textit{rhombeus}	&	\textit{RAG1}	&	MT372758.1	\\
+\textit{Serrasalmus}	&	\textit{rhombeus}	&	\textit{RAG2}	&	MT372769.1	\\
+\end{longtable}
+
+## Substitution models
+
+Before finding substitution models, it was necessary to rename the sequences so that jModelTest won't complain by using the script `taxNamesFasta.R`
+
+```{bash eval = FALSE}
+Rscript scripts/taxNamesFasta.R
+```
+
+The following script was used for finding the substitution models
+
+```{bash eval = FALSE}
+#!/bin/bash
+
+for i in $(ls *.trimmed.fasta)
+do
+    echo "Running jModelTest2 on $i\n"
+    java -jar ~/programs/jmodeltest2/dist/jModelTest.jar -BIC -d $i 
+	                                                     -f -i -g 4 
+														 -s 3 -t ML 
+														 -tr 4 -o $i`date +"%H.%M_%d_%m_%Y"`'.out'
+done
+```
+
+The following models were chosen:
+
+```{bash}
+for i in `ls ../phylo/bayesian/sequences/alignedSeqs/substModels/*.out`; do
+  echo "$i" | cut -d '/' -f 4
+  tail -n 1 $i | awk '{print $2}'
+  printf "\n"
+done
+```
+
+Now the matrices need to be converted to nexus in order to concatenate. In this step it is crucial to include a morphological fasta file with all missing data in order to guarantee that both molecular and morphological matrices can be concatenated:
+
+```{bash eval = FALSE}
+>Hydrolycus_MUN_16211
+---------------------------------------------------------------------------------
+>Hydrolycus_armatus
+---------------------------------------------------------------------------------
+>Hydrolycus_tatauaia
+---------------------------------------------------------------------------------
+>Hydrolycus_wallacei
+---------------------------------------------------------------------------------
+>Hydrolycus_scomberoides
+---------------------------------------------------------------------------------
+>Rhaphiodon_vulpinus
+---------------------------------------------------------------------------------
+>Cynodon_gibbus
+---------------------------------------------------------------------------------
+>Cynodon_septenarius
+---------------------------------------------------------------------------------
+>Acestrorhynchus_falcirostris
+---------------------------------------------------------------------------------
+>Acestrorhynchus_microlepis
+---------------------------------------------------------------------------------
+>Myloplus_schomburkii
+---------------------------------------------------------------------------------
+>Serrasalmus_rhombeus
+---------------------------------------------------------------------------------
+```
+
+These matrices can then be renamed sharing taxon names across partitions with the script `createNexusFiles.R`:
+
+```{bash eval = FALSE}
+Rscript scripts/createNexusFiles.R
+```
+
+Then we need to concatenate these nexus files for the only-molecular analysis and then add the morphological partition for the total evidence analysis. The script `concatenateMatricesMolonly.R` will call the `concatNexus.R` function and produce a molecular-only concatenated matrix along with endpoints for partitions. 
+
+```{bash eval = FALSE}
+Rscript scripts/concatenateMatricesMolonly.R
+```
+
+Checking matrix integrity for the Molecular-only matrix:
+
+```{bash}
+mb ../phylo/bayesian/sequences/alignedSeqs/substModels/nexus/concatenatedMolonly.nexus > outmbMolonlyConcat
+cat outmbMolonlyConcat 
+```
+
+There is another script named `concatenateMatricesMolmorph.R` for the total evidence analysis.
+
+```{bash eval = FALSE}
+Rscript scripts/concatenateMatricesMolmorph.R
+```
+
+Checking matrix integrity for the total-evidence matrix:
+
+```{bash}
+mb ../phylo/bayesian/sequences/alignedSeqs/substModels/nexus/concatenatedMolmorph.nexus > outmbMolmorphConcat
+cat outmbMolmorphConcat
+```
+
+## `MrBayes` script
+
+For the molecular-only analysis (Figure \ref{fig:molOnlyBayes}) we have generated the following script:
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figures/concatenatedMolonly.nexus.con.tre}
+  \caption{Molecular-only bayesian inference tree. Nodal values are posterior probabilities. Scale is branch length.}
+  \label{fig:molOnlyBayes}
+\end{figure}
+
+```{bash eval = FALSE}
+begin mrbayes;
+[Script documentation carried out using comments]
+
+[log the analysis]
+log start filename=cynoMolonly.log;
+[read the matrix concatenatedMolonly.nexus]
+execute concatenatedMolonly.nexus;
+
+[close analysis at end]
+set autoclose=yes;
+[set Acestrorhynchus_microlepis as outgroup]
+outgroup Acestrorhynchus_microlepis;
+[This command shows the status of all the taxa, according to the documentation]
+taxastat;
+
+[definition of individual partitions per marker]
+charset 16S=1-586;
+charset 18S=587-1127;
+charset ATPase6_8=1128-1910;
+charset COI=1911-2415;
+charset CytB=2416-3252;
+charset Myh6=3253-3954;
+charset RAG1=3955-5219;
+charset RAG2=5220-6232;
+
+[definition of combined dataset]
+partition combined=8: 16S, 18S, ATPase6_8, COI, CytB, Myh6, RAG1, RAG2;
+
+[specification of substitution models]
+set partition=combined;
+lset applyto=(1) nst=6 rates=gamma; [SYM+G]
+lset applyto=(2) nst=2; [K80]
+lset applyto=(3) nst=2 rates=propinv; [HKY+I]
+lset applyto=(4) nst=2 rates=gamma; [HKY+G]
+lset applyto=(5) nst=2 rates=gamma; [HKY+G]
+lset applyto=(6) nst=2 rates=propinv; [K80+I]
+lset applyto=(7) nst=2 rates=gamma; [K80+G]
+lset applyto=(8) nst=2 rates=gamma; [K80+G]
+
+[unlink parameters across partitions]
+unlink shape=(all) pinvar=(all) statefreq=(all) revmat=(all) tratio=(all);
+
+[allow separate gamma parameters for each partition and set the stationary freqs in SYM and K80]
+prset applyto=(1) statefreqpr=fixed(equal); [SYM+G in 16S]
+prset applyto=(2) statefreqpr=fixed(equal); [K80 in 18S]
+prset applyto=(6) statefreqpr=fixed(equal); [K80 in Myh6]
+prset applyto=(7) statefreqpr=fixed(equal); [K80 in RAG1]
+prset applyto=(8) statefreqpr=fixed(equal); [K80 in RAG2]
+prset applyto=(all) ratepr=variable;
+
+[turn off taxa for which there are no molecular data]
+delete Hydrolycus_MUN_16211 Hydrolycus_wallacei Cynodon_septenarius Hydrolycus_tatauaia;
+
+[show taxa]
+taxastat;
+
+[show the model just specified for each partition]
+showmodel;
+
+[set up the MCMC, with this setting the analysis will need not less than 16 threads]
+mcmcp nruns=2 ngen=4000000 nchains=8 samplefreq=4000 printfreq=100;
+[run the MCMC]
+mcmc;
+
+[summarize the posterior trees]
+sumt nruns=2 relburnin=yes burninfrac=0.25;
+plot;
+
+[summarize parameter posteriors]
+sump;
+
+log stop;
+end;
+```
+
+Now, for the total evidence analysis (Figure \ref{fig:molMorphBayes}), the following script was used:
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{figures/concatenatedMolmorph.nexus.con.tre}
+  \caption{Combined analysis using both the morphological and molecular datasets bayesian inference. Nodal values are posterior probabilities. Scale is branch length.}
+  \label{fig:molMorphBayes}
+\end{figure}
+
+```{bash eval = FALSE}
+begin mrbayes;
+[Script documentation carried out using comments]
+
+[log the analysis]
+log start filename=cynoMolmorph.log;
+[read the matrix concatenatedMolmorph.nexus]
+execute concatenatedMolmorph.nexus;
+
+[close analysis at end]
+set autoclose=yes;
+[set Acestrorhynchus_microlepis as outgroup]
+outgroup Acestrorhynchus_microlepis;
+[This command shows the status of all the taxa, according to the documentation]
+taxastat;
+
+[definition of individual partitions per marker]
+charset 16S=1-586;
+charset 18S=587-1127;
+charset ATPase6_8=1128-1910;
+charset COI=1911-2415;
+charset CytB=2416-3252;
+charset Myh6=3253-3954;
+charset RAG1=3955-5219;
+charset RAG2=5220-6232;
+charset morph=6233-6312;
+
+[definition of combined dataset]
+partition combined=9: 16S, 18S, ATPase6_8, COI, CytB, Myh6, RAG1, RAG2,  morph;
+
+[specification of substitution models]
+set partition=combined;
+lset applyto=(1) nst=6 rates=gamma; [SYM+G]
+lset applyto=(2) nst=2; [K80]
+lset applyto=(3) nst=2 rates=propinv; [HKY+I]
+lset applyto=(4) nst=2 rates=gamma; [HKY+G]
+lset applyto=(5) nst=2 rates=gamma; [HKY+G]
+lset applyto=(6) nst=2 rates=propinv; [K80+I]
+lset applyto=(7) nst=2 rates=gamma; [K80+G]
+lset applyto=(8) nst=2 rates=gamma; [K80+G]
+
+[unlink parameters across partitions]
+unlink shape=(all) pinvar=(all) statefreq=(all) revmat=(all) tratio=(all);
+
+[allow separate gamma parameters for each partition and set the stationary freqs in SYM and K80]
+prset applyto=(1) statefreqpr=fixed(equal); [SYM+G in 16S]
+prset applyto=(2) statefreqpr=fixed(equal); [K80 in 18S]
+prset applyto=(6) statefreqpr=fixed(equal); [K80 in Myh6]
+prset applyto=(7) statefreqpr=fixed(equal); [K80 in RAG1]
+prset applyto=(8) statefreqpr=fixed(equal); [K80 in RAG2]
+prset applyto=(all) ratepr=variable;
+
+[show the model just specified for each partition]
+showmodel;
+
+[set up the MCMC, with this setting the analysis will need not less than 16 threads]
+mcmcp nruns=2 ngen=4000000 nchains=8 samplefreq=4000 printfreq=100;
+[run the MCMC]
+mcmc;
+
+[summarize the posterior trees]
+sumt nruns=2 relburnin=yes burninfrac=0.25;
+plot;
+
+[summarize parameter posteriors]
+sump;
+
+log stop;
+end;
+```
+
+### Analysis output
+
+```{bash eval=FALSE}
+      Analysis completed in 42 mins 38 seconds
+      Analysis used 2485.60 seconds of CPU time on processor 0
+      Likelihood of best state for "cold" chain of run 1 was -16693.94
+      Likelihood of best state for "cold" chain of run 2 was -16693.94
+
+      Chain swap information for run 1:
+
+                   1       2       3       4       5       6       7       8 
+           ------------------------------------------------------------------
+         1 |            0.68    0.42    0.25    0.13    0.07    0.03    0.01 
+         2 |  142186            0.70    0.46    0.28    0.15    0.08    0.04 
+         3 |  142972  142680            0.72    0.48    0.30    0.17    0.09 
+         4 |  142637  142587  142884            0.73    0.49    0.31    0.18 
+         5 |  142683  143807  142387  143018            0.74    0.50    0.31 
+         6 |  142833  142619  142866  142306  142724            0.73    0.50 
+         7 |  142831  142957  142709  143133  143195  143199            0.73 
+         8 |  142398  143079  143396  143044  142770  143295  142805         
+
+      Chain swap information for run 2:
+
+                   1       2       3       4       5       6       7       8 
+           ------------------------------------------------------------------
+         1 |            0.68    0.43    0.25    0.13    0.06    0.03    0.01 
+         2 |  143065            0.70    0.45    0.27    0.15    0.07    0.03 
+         3 |  142334  143275            0.72    0.47    0.29    0.15    0.07 
+         4 |  142416  142367  142417            0.73    0.48    0.28    0.14 
+         5 |  142321  143286  143162  142729            0.72    0.47    0.27 
+         6 |  143234  143414  143465  142956  142904            0.71    0.45 
+         7 |  143287  142386  142730  143732  142829  142425            0.70 
+         8 |  142671  143345  143120  142666  142757  142676  142031         
+
+      Upper diagonal: Proportion of successful state exchanges between chains
+      Lower diagonal: Number of attempted state exchanges between chains
+
+      Chain information:
+
+        ID -- Heat 
+       -----------
+         1 -- 1.00  (cold chain)
+         2 -- 0.91 
+         3 -- 0.83 
+         4 -- 0.77 
+         5 -- 0.71 
+         6 -- 0.67 
+         7 -- 0.62 
+         8 -- 0.59 
+
+      Heat = 1 / (1 + T * (ID - 1))
+         (where T = 0.10 is the temperature and ID is the chain number)
+
+      Setting sumt nruns to 2
+      Using relative burnin (a fraction of samples discarded).
+      Setting burnin fraction to 0.25
+      Summarizing trees in files "concatenatedMolmorph.nexus.run1.t" and "concatenatedMolmorph.nexus.run2.t"
+      Using relative burnin ('relburnin=yes'), discarding the first 25 % of sampled trees
+      Writing statistics to files concatenatedMolmorph.nexus.<parts|tstat|vstat|trprobs|con>
+      Examining first file ...
+      Found one tree block in file "concatenatedMolmorph.nexus.run1.t" with 1001 trees in last block
+      Expecting the same number of trees in the last tree block of all files
+
+      Tree reading status:
+
+      0      10      20      30      40      50      60      70      80      90     100
+      v-------v-------v-------v-------v-------v-------v-------v-------v-------v-------v
+      *********************************************************************************
+
+      Read a total of 2002 trees in 2 files (sampling 1502 of them)
+         (Each file contained 1001 trees of which 751 were sampled)
+      Overwriting file "concatenatedMolmorph.nexus.parts"
+      Overwriting file "concatenatedMolmorph.nexus.tstat"
+      Overwriting file "concatenatedMolmorph.nexus.vstat"
+      Overwriting file "concatenatedMolmorph.nexus.con.tre"
+      Overwriting file "concatenatedMolmorph.nexus.trprobs"
+                                                                                   
+      Summary statistics for informative taxon bipartitions
+         (saved to file "concatenatedMolmorph.nexus.tstat"):
+
+      ID   #obs    Probab.     Sd(s)+      Min(s)      Max(s)   Nruns 
+      ----------------------------------------------------------------
+      13  1502    1.000000    0.000000    1.000000    1.000000    2
+      14  1502    1.000000    0.000000    1.000000    1.000000    2
+      15  1502    1.000000    0.000000    1.000000    1.000000    2
+      16  1502    1.000000    0.000000    1.000000    1.000000    2
+      17  1502    1.000000    0.000000    1.000000    1.000000    2
+      18  1483    0.987350    0.004708    0.984021    0.990679    2
+      19  1392    0.926764    0.001883    0.925433    0.928096    2
+      20  1359    0.904794    0.014123    0.894807    0.914780    2
+      21  1010    0.672437    0.005649    0.668442    0.676431    2
+      22   387    0.257656    0.017890    0.245007    0.270306    2
+      ----------------------------------------------------------------
+      + Convergence diagnostic (standard deviation of split frequencies)
+        should approach 0.0 as runs converge.
+
+
+      Summary statistics for branch and node parameters
+         (saved to file "concatenatedMolmorph.nexus.vstat"):
+
+                                                   95% HPD Interval
+                                                 --------------------
+      Parameter           Mean       Variance     Lower       Upper       Median     PSRF+  Nruns
+      -------------------------------------------------------------------------------------------
+      length{all}[1]     0.121283    0.000647    0.076079    0.168235    0.119123    1.000    2
+      length{all}[2]     0.003304    0.000011    0.000005    0.009570    0.002368    1.000    2
+      length{all}[3]     0.006582    0.000034    0.000007    0.018537    0.005021    1.000    2
+      length{all}[4]     0.106678    0.000490    0.064165    0.145773    0.104678    0.999    2
+      length{all}[5]     0.123063    0.000415    0.089677    0.158913    0.120216    0.999    2
+      length{all}[6]     0.053902    0.000123    0.034775    0.074554    0.052914    0.999    2
+      length{all}[7]     0.066541    0.000145    0.046582    0.091292    0.065228    0.999    2
+      length{all}[8]     0.017230    0.000328    0.000011    0.051679    0.011725    0.999    2
+      length{all}[9]     0.002073    0.000004    0.000002    0.005984    0.001411    1.000    2
+      length{all}[10]    0.005258    0.000033    0.000000    0.015477    0.003577    1.000    2
+      length{all}[11]    0.031454    0.000449    0.000003    0.073582    0.027998    1.000    2
+      length{all}[12]    0.005225    0.000028    0.000000    0.015899    0.003522    1.001    2
+      length{all}[13]    0.093332    0.000513    0.051032    0.138028    0.090221    1.000    2
+      length{all}[14]    0.107790    0.000890    0.056422    0.165460    0.104002    0.999    2
+      length{all}[15]    0.075369    0.000215    0.050442    0.103065    0.074390    1.000    2
+      length{all}[16]    0.061229    0.000323    0.028559    0.092868    0.060664    0.999    2
+      length{all}[17]    0.129496    0.000689    0.087184    0.181383    0.126789    0.999    2
+      length{all}[18]    0.015813    0.000072    0.001222    0.031710    0.014454    1.000    2
+      length{all}[19]    0.017380    0.000067    0.002449    0.033320    0.016695    1.000    2
+      length{all}[20]    0.022256    0.000068    0.004804    0.036643    0.022130    1.002    2
+      length{all}[21]    0.021295    0.000175    0.000274    0.046515    0.019714    0.999    2
+      length{all}[22]    0.015604    0.000101    0.000071    0.033194    0.015121    0.999    2
+      -------------------------------------------------------------------------------------------
+      + Convergence diagnostic (PSRF = Potential Scale Reduction Factor; Gelman
+        and Rubin, 1992) should approach 1.0 as runs converge. NA is reported when
+        deviation of parameter values within all runs is 0 or when a parameter
+        value (a branch length, for instance) is not sampled in all runs.
+
+
+      Summary statistics for partitions with frequency >= 0.10 in at least one run:
+          Average standard deviation of split frequencies = 0.004425
+          Maximum standard deviation of split frequencies = 0.017890
+          Average PSRF for parameter values (excluding NA and >10.0) = 1.000
+          Maximum PSRF for parameter values = 1.002
+
+
+      Clade credibility values:
+
+      /---------------------------------------------------------- Acestrorhynchus~ (4)
+      |                                                                               
+      |---------------------------------------------------------- Acestrorhynchus~ (1)
+      |                                                                               
+      |                                                 /-------- Cynodon_gibbus (2)
+      |                        /-----------100----------+                             
+      |                        |                        \-------- Cynodon_septen~ (12)
+      |                        |                                                      
+      |                        |                        /-------- Hydrolycus_scom~ (3)
+      +                        |               /---93---+                             
+      |                /---90--+               |        \-------- Hydrolycus_MUN_~ (8)
+      |                |       |       /--100--+                                      
+      |                |       |       |       |        /-------- Hydrolycus_arma~ (9)
+      |                |       |       |       \---99---+                             
+      |       /---100--+       \---67--+                \-------- Hydrolycus_tat~ (10)
+      |       |        |               |                                              
+      |       |        |               \------------------------- Hydrolycus_wal~ (11)
+      |       |        |                                                              
+      \--100--+        \----------------------------------------- Rhaphiodon_vulp~ (5)
+              |                                                                       
+              |                                         /-------- Serrasalmus_rho~ (6)
+              \-------------------100-------------------+                             
+                                                        \-------- Myloplus_schomb~ (7)
+                                                                                      
+
+      Phylogram (based on average branch lengths):
+
+                                                                                                                                                      /----------------- Acestrorhynchus~ (4)
+      |                                                                               
+      |------------------- Acestrorhynchus~ (1)
+      |                                                                               
+      |                                                   /- Cynodon_gibbus (2)
+      |                                        /----------+                           
+      |                                        |          \- Cynodon_septen~ (12)
+      |                                        |                                      
+      |                                        |              /- Hydrolycus_scom~ (3)
+      +                                        |           /--+                       
+      |                                    /---+           |  \-- Hydrolycus_MUN_~ (8)
+      |                                    |   |  /--------+                          
+      |                                    |   |  |        |  / Hydrolycus_arma~ (9)
+      |                                    |   |  |        \--+                       
+      |                /-------------------+   \--+           \ Hydrolycus_tat~ (10)
+      |                |                   |      |                                   
+      |                |                   |      \---- Hydrolycus_wal~ (11)
+      |                |                   |                                          
+      \----------------+                   \------------------- Rhaphiodon_vulp~ (5)
+                       |                                                              
+                       |             /--------- Serrasalmus_rho~ (6)
+                       \-------------+                                                
+                                     \----------- Myloplus_schomb~ (7)
+                                                                                      
+      |---------------| 0.100 expected changes per site
+
+      Calculating tree probabilities...
+
+      Credible sets of trees (21 trees sampled):
+         90 % credible set contains 5 trees
+         95 % credible set contains 7 trees
+         99 % credible set contains 15 trees
+
+      Plotting parameters in file concatenatedMolmorph.nexus.run1.p ...
+      Found 1000 parameter lines in file "concatenatedMolmorph.nexus.run1.p"
+      Of the 1000 lines, 751 of them will be summarized (starting at line 252)
+      (Only the last set of lines will be read, in case multiple
+      parameter blocks are present in the same file.)
+
+      Rough trace plot of parameter LnL:
+
+   +------------------------------------------------------------+ -16709.582
+   |   *              *                                         |
+   |                                            *               |
+   |                                                            |
+   |        *                   *            *   **         *   |
+   |     *          *    * *             * *         *          |
+   |    *                    * * *   **   *   *          **     |
+   | *           *                     *           *   **       |
+   |* *           *    *                    *       *           |
+   |      ** *       *      * *   *                             |
+   |               *    *           *   *      *      *         |
+   |                               *                           *|
+   |            *         *                                   * |
+   |          *                                                 |
+   |                                                         *  |
+   |           *                                           *    |
+   +------+-----+-----+-----+-----+-----+-----+-----+-----+-----+ -16717.207
+   ^                                                            ^
+   1000000                                                     4000000
+
+      Summarizing parameters in files concatenatedMolmorph.nexus.run1.p and concatenatedMolmorph.nexus.run2.p
+      Writing summary statistics to file concatenatedMolmorph.nexus.pstat
+      Using relative burnin ('relburnin=yes'), discarding the first 25 % of samples
+
+      Below are rough plots of the generation (x-axis) versus the log   
+      probability of observing the data (y-axis). You can use these     
+      graphs to determine what the burn in for your analysis should be. 
+      When the log probability starts to plateau you may be at station- 
+      arity. Sample trees and parameters after the log probability      
+      plateaus. Of course, this is not a guarantee that you are at sta- 
+      tionarity. Also examine the convergence diagnostics provided by   
+      the 'sump' and 'sumt' commands for all the parameters in your     
+      model. Remember that the burn in is the number of samples to dis- 
+      card. There are a total of ngen / samplefreq samples taken during 
+      a MCMC analysis.                                                  
+
+      Overlay plot for both runs:
+      (1 = Run number 1; 2 = Run number 2; * = Both runs)
+
+      +------------------------------------------------------------+ -16708.69
+      |         2                            2              2      |
+      |   1                                             2          |
+      |                  1                                         |
+      | 2      2          2             2          1 2             |
+      |2       1             2     1  2         1   *1         1   |
+      |  22 1               * 1  22 22      1 *        21    2     |
+      |    *2     2  2 1   2    * 1 1   11   1   *          11     |
+      |111         21122  1   2          21    1  22  *1  11     2 |
+      |      2      2   1      2   2 1     2               2      2|
+      |      11 1              1 1     *  2    22 1      2         |
+      |       2  2    1 22 1               12            1    22  1|
+      |                      1        1                            |
+      |            1                                      2      1 |
+      |          1                                              *  |
+      |           1                                           1    |
+      +------+-----+-----+-----+-----+-----+-----+-----+-----+-----+ -16717.21
+      ^                                                            ^
+      1000000                                                      4000000
+
+      Overwriting file "concatenatedMolmorph.nexus.lstat"
+
+      Estimated marginal likelihoods for runs sampled in files
+         "concatenatedMolmorph.nexus.run1.p" and "concatenatedMolmorph.nexus.run2.p":
+         (Use the harmonic mean for Bayes factor comparisons of models)
+
+         (Values are saved to the file concatenatedMolmorph.nexus.lstat)
+
+      Run   Arithmetic mean   Harmonic mean
+      --------------------------------------
+        1     -16704.33        -16727.97
+        2     -16704.44        -16725.91
+      --------------------------------------
+      TOTAL   -16704.38        -16727.40
+      --------------------------------------
+
+
+      Model parameter summaries over the runs sampled in files
+         "concatenatedMolmorph.nexus.run1.p" and "concatenatedMolmorph.nexus.run2.p":
+         Summaries are based on a total of 1502 samples from 2 runs.
+         Each run produced 1001 samples of which 751 samples were included.
+         Parameter summaries saved to file "concatenatedMolmorph.nexus.pstat".
+      Overwriting file "concatenatedMolmorph.nexus.pstat"
+
+                                              95% HPD Interval
+                                            --------------------
+      Parameter       Mean      Variance     Lower       Upper       Median    min ESS*  avg ESS    PSRF+ 
+      ----------------------------------------------------------------------------------------------------
+      TL{all}       1.081992    0.024825    0.828699    1.359915    1.060861    565.46    575.83    1.000
+      kappa{2}      2.421763    0.482698    1.326020    3.962307    2.321954    611.26    681.13    1.000
+      kappa{3}      9.909513    5.021388    6.299223   14.127390    9.601083    601.55    676.28    0.999
+      kappa{4}     18.269297   70.476883    7.888667   33.629870   16.540860    501.59    585.52    0.999
+      kappa{5}     11.771211    9.826783    7.091952   17.154490   11.268230    503.47    627.24    1.001
+      kappa{6}      9.058976    7.792466    4.386020   14.399150    8.611278    680.61    715.81    0.999
+      kappa{7}      5.451419    0.950469    3.668134    7.309621    5.382256    635.25    693.13    1.000
+      kappa{8}      4.949995    0.738370    3.444329    6.762524    4.878486    710.56    730.78    1.002
+      r(A<->C){1}   0.091547    0.000582    0.043856    0.137109    0.090916    566.91    614.45    1.000
+      r(A<->G){1}   0.201943    0.001146    0.135144    0.267439    0.201132    580.61    665.81    1.000
+      r(A<->T){1}   0.103613    0.000588    0.059235    0.153394    0.102838    676.17    713.59    0.999
+      r(C<->G){1}   0.010581    0.000070    0.000016    0.027046    0.008947    556.08    634.04    1.000
+      r(C<->T){1}   0.583848    0.002741    0.485676    0.682432    0.582281    575.87    618.30    0.999
+      r(G<->T){1}   0.008467    0.000052    0.000007    0.023403    0.006692    632.09    691.55    1.000
+      pi(A){3}      0.294309    0.000179    0.266511    0.318523    0.294860    751.00    751.00    1.001
+      pi(C){3}      0.322309    0.000171    0.296207    0.346717    0.322268    751.00    751.00    1.000
+      pi(G){3}      0.113658    0.000073    0.097144    0.129874    0.113682    692.97    721.98    1.000
+      pi(T){3}      0.269723    0.000139    0.246368    0.291832    0.269587    531.18    641.09    1.007
+      pi(A){4}      0.253823    0.000253    0.221791    0.284381    0.253483    664.93    707.97    1.000
+      pi(C){4}      0.320107    0.000271    0.287524    0.350807    0.319617    703.06    713.76    0.999
+      pi(G){4}      0.152532    0.000157    0.129425    0.178021    0.152447    447.88    527.18    0.999
+      pi(T){4}      0.273538    0.000234    0.245050    0.303697    0.273273    735.21    743.10    1.000
+      pi(A){5}      0.283648    0.000190    0.257013    0.311128    0.283483    751.00    751.00    0.999
+      pi(C){5}      0.377336    0.000207    0.349711    0.404988    0.376773    587.91    669.46    1.000
+      pi(G){5}      0.118121    0.000076    0.102446    0.135929    0.117900    670.19    710.59    1.000
+      pi(T){5}      0.220894    0.000126    0.199958    0.242083    0.220631    625.74    688.37    1.000
+      alpha{1}      0.195004    0.001539    0.129338    0.275439    0.190472    751.00    751.00    0.999
+      alpha{4}      0.137169    0.000516    0.096190    0.184523    0.135719    544.95    606.13    1.000
+      alpha{5}      0.109087    0.000387    0.072005    0.143524    0.109857    653.91    702.46    1.000
+      alpha{7}      0.280499    0.029045    0.001010    0.595317    0.251893    751.00    751.00    1.000
+      alpha{8}      1.161758    0.537155    0.260355    2.624213    0.959879    467.26    609.13    1.000
+      pinvar{3}     0.496351    0.000511    0.450581    0.539967    0.496751    522.00    561.78    1.000
+      pinvar{6}     0.729193    0.007206    0.567212    0.866081    0.744308    718.19    734.60    0.999
+      m{1}          0.656955    0.012828    0.441965    0.867755    0.647204    571.08    598.84    1.000
+      m{2}          0.142192    0.000736    0.089194    0.192879    0.141289    445.19    554.48    0.999
+      m{3}          2.281850    0.148166    1.627690    3.080942    2.267581    496.76    563.39    1.000
+      m{4}          3.177575    0.710836    1.724133    4.791906    3.041214    474.90    481.32    1.000
+      m{5}          1.919017    0.111336    1.344906    2.624610    1.895170    482.75    525.80    1.001
+      m{6}          0.188779    0.001290    0.122588    0.258991    0.186690    601.76    627.43    1.001
+      m{7}          0.230903    0.001119    0.167111    0.297218    0.230352    672.80    674.36    0.999
+      m{8}          0.277220    0.001705    0.197420    0.361959    0.276121    595.39    599.49    0.999
+      m{9}          1.838470    0.135857    1.167301    2.584990    1.812737    563.99    573.85    0.999
+      ----------------------------------------------------------------------------------------------------
+      * Convergence diagnostic (ESS = Estimated Sample Size); min and avg values
+        correspond to minimal and average ESS among runs. 
+        ESS value below 100 may indicate that the parameter is undersampled. 
+      + Convergence diagnostic (PSRF = Potential Scale Reduction Factor; Gelman
+        and Rubin, 1992) should approach 1.0 as runs converge.
+
+```

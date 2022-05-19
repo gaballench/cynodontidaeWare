@@ -1,0 +1,53 @@
+
+
+                            MrBayes 3.2.7a x86_64
+
+                      (Bayesian Analysis of Phylogeny)
+
+              Distributed under the GNU General Public License
+
+
+               Type "help" or "help <command>" for information
+                     on the commands that are available.
+
+                   Type "about" for authorship and general
+                       information about the program.
+
+
+
+   Executing file "../phylo/bayesian/sequences/alignedSeqs/substModels/nexus/concatenatedMolonly.nexus"
+   UNIX line termination
+   Longest line length = 1304
+   Parsing file
+   Expecting NEXUS formatted file
+   Reading data block
+      Allocated taxon set
+      Allocated matrix
+      Defining new matrix with 10 taxa and 6061 characters
+      Data is Dna
+      Missing data coded as ?
+      Gaps coded as -
+      Data matrix is interleaved
+      Taxon  1 -> Acestrorhynchus_falcirostris
+      Taxon  2 -> Cynodon_gibbus
+      Taxon  3 -> Hydrolycus_scomberoides
+      Taxon  4 -> Acestrorhynchus_microlepis
+      Taxon  5 -> Rhaphiodon_vulpinus
+      Taxon  6 -> Hydrolycus_armatus
+      Taxon  7 -> Hydrolycus_MUN_16211
+      Taxon  8 -> Hydrolycus_tatauaia
+      Taxon  9 -> Hydrolycus_wallacei
+      Taxon 10 -> Cynodon_septenarius
+      Successfully read matrix
+      Setting default partition (does not divide up characters)
+      Setting model defaults
+      Seed (for generating default start values) = 1652999209
+      Setting output file names to "../phylo/bayesian/sequences/alignedSeqs/substModels/nexus/concatenatedMolonly.nexus.run<i>.<p|t>"
+   Exiting data block
+   Reached end of file
+
+   Tasks completed, exiting program because mode is noninteractive
+   To return control to the command line after completion of file processing, 
+   set mode to interactive with 'mb -i <filename>' (i is for interactive)
+   or use 'set mode=interactive'
+
